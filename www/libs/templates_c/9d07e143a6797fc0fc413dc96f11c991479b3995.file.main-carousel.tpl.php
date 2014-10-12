@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2014-10-08 11:55:02
+<?php /* Smarty version Smarty-3.1.18, created on 2014-10-12 09:49:47
          compiled from "libs\templates\inner-tpl\carousel\main-carousel.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:25666542e4ea57c8176-11948031%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9d07e143a6797fc0fc413dc96f11c991479b3995' => 
     array (
       0 => 'libs\\templates\\inner-tpl\\carousel\\main-carousel.tpl',
-      1 => 1412762100,
+      1 => 1413098657,
       2 => 'file',
     ),
   ),

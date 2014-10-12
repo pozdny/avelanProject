@@ -1,4 +1,7 @@
 <?php
+if (!isset($_SESSION)) {
+    session_start();
+}
 /**
  * Created by PhpStorm.
  * User: Valentina
@@ -8,12 +11,12 @@
 header("Content-Type: text/plain");
 header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Pragma: no-cache");
-// подключаем основные настройки
+// configs
 define('SMARTY_DIR', '../libs/');
 require_once '../include/config.php';
-// Подключаем БД
+// BD
 require_once('../connection/DBClass.php');
-//Создадим объект класса Smarty
+// Smarty
 require_once '../libs/Smarty.class.php';
 $smarty = new Smarty();
 require_once '../libs/setup.php';
@@ -22,7 +25,8 @@ require_once('../include/include.php');
 if(!isset($_SERVER['HTTP_X_REQUESTED_WITH']))
 {
     header('Content-Type:text/javascript; charset=utf-8');
-    exit('Данные отправлены не через AJAX');
+    error404(SAPI_NAME, REQUEST_URL);
+    exit('no AJAX');
 }
 else{
     header('Content-Type:text/javascript; charset=utf-8');
@@ -67,13 +71,13 @@ function BackCall($value){
 }
 function sendmail($arr)
 {
-    // Читаем настройки config
+    //  config
     require_once('../lib/phpmailer/config.php');
 
-// Подключаем класс FreakMailer
+    //  FreakMailer
     require_once('../lib/MailClass.inc');
 
-// инициализируем класс
+    // to-email
     $mailer = new FreakMailer();
     $email = $mailer->to_email;
     $name = $mailer->to_name;
@@ -82,15 +86,15 @@ function sendmail($arr)
         $email2 = $mailer->to_email2;
     }
 
-// Устанавливаем тему письма
-    $subject = "Заказ обратного звонка";
+    // subject
+    $subject = "Р—Р°РєР°Р· РѕР±СЂР°С‚РЅРѕРіРѕ Р·РІРѕРЅРєР°";
     $mailer->Subject = $subject;
 
-// Задаем тело письма
+    // body
     $htmlBody = createMailMessage($arr);
     $mailer->Body = $htmlBody;
 
-// Добавляем адрес в список получателей
+    // address
     $mailer->AddAddress($email, $name);
     if($email2!=''){
         $mailer->AddCC($email2, $name);
@@ -127,7 +131,7 @@ function login(){
     $password  = '';
     $autologin = '';
     $rez       = '';
-    //обрабатываем массив $arr
+    //$arr
     $array = $_POST['arr'];
     if(isset($array[0]))
         $login     = $array[0]['value'];
@@ -147,17 +151,17 @@ function login(){
         $password_cook = $password;
         $login    = $login.SALT_LOG;
         $password = $password.SALT_PAS;
-        // Выполняем запрос на получение данных пользователя из БД
+        // find user
         $query = "SELECT * FROM ".TABLE_ADMIN_USERS."
                          WHERE login='".md5($login)."'
 						 AND password='".md5($password)."'
 			             LIMIT 1";
         $mysqli->_execute($query);
-        $row_name = $mysqli->fetch();
+        $user = $mysqli->fetch();
         if ($mysqli->num_rows() > 0 )
         {
-            $rights  = $row_name['rights'];
-            $_SESSION['MM_Username'] = $row_name;
+            $rights  = $user['rights'];
+            $_SESSION["MM_Username"] = $user;
             setLastVisit();
             setcookie( 'name', '', time() - 1, "/", HOST_NAME );
             setcookie( 'password', '', time() - 1, "/", HOST_NAME );
@@ -196,17 +200,17 @@ function login(){
 function setLastVisit()
 {
     $mysqli = M_Core_DB::getInstance();
-    if ( isset( $_SESSION['MM_Username']) )
+    if ( isset($_SESSION["MM_Username"]))
     {
         $query = "SELECT * FROM ".TABLE_ADMIN_USERS."
-	        WHERE id=".$_SESSION['MM_Username']['id'] ;
+	        WHERE id=".$_SESSION["MM_Username"]["id"] ;
         $mysqli->_execute( $query );
         $row = $mysqli->fetch();
 
         $_SESSION['last_visit'] = $row;
         $query = "UPDATE ".TABLE_ADMIN_USERS."
 	        SET last_visit=NOW()
-			WHERE id=".$_SESSION['MM_Username']['id'] ;
+			WHERE id=".$_SESSION["MM_Username"]["id"] ;
         $mysqli->query( $query );
     }
 }

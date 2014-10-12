@@ -32,38 +32,18 @@ body{
     height:auto;
     position:relative;
     overflow:hidden;
-    margin:0 auto -49px auto;
+    margin:0 auto -53px auto;
 }
 #content_border{
     height:auto;
     margin:0;
     position:static;
+    background: none repeat scroll 0 0 #f0f0f0;
+}
 
-}
-#content_big{
-    margin:0 0 0 280px;
-
-}
-.CONTENT{
-    width:100%;
-    position:static;
-    float:left;
-    display: inline;
-    min-height:100%;
-}
-#main_block{
-    width:99%;
-    overflow:hidden;
-    padding-left:5px;
-
-}
 #undermain{
     position:relative;
     width:100%;
-    text-align: justify;
-}
-.footer-pusher{
-	background: none
 }
 .head
 {
@@ -75,16 +55,16 @@ body{
 
 }
 #footer{
-    height: 50px;
+    height: 54px;
     width:100%;
     position:absolute;
-    background:#FFF;
+    background: #274B7F;
+    color:#fff
 
 }
 .footer-pusher{
-    height:65px;
+    height:54px;
     clear: both;
-    background:#fff
 }
 #main_foot{
     padding:8px 5px;
@@ -168,11 +148,7 @@ body{
 	font:bold 14px Tahoma, Geneva, sans-serif;
 	color:#fff;
 	text-align:center;
-	-webkit-border-radius: 5px 5px 0 0;
-	-moz-border-radius: 5px 5px 0 0;
-	border-radius: 5px 5px 0 0;
-	behavior: url(http://xn--80aafm4an.xn--p1ai/css/PIE.htc);
-	
+
 }
 .a_dop
 {
@@ -181,12 +157,12 @@ body{
 /*...........product..........*/
 .submenu_prod td
 {
-	background: url(../img/main/blue_grad.jpg) repeat-x;
+	background: url(../img/admin/blue_grad.jpg) repeat-x;
 	height:30px
 }
 .submenu_td2 td
 {
-	background: url(../img/main/grey_grad_tab.jpg) repeat-x;
+	background: url(../img/admin/grey_grad_tab.jpg) repeat-x;
 	height:30px;
 }
 .submenu_td3 td

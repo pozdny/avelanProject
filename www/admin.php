@@ -1,24 +1,24 @@
 <?php
 if (!isset($_SESSION)) {
-  session_start();
+    session_start();
 }
-// подключаем основные настройки
+// configs
 define('SMARTY_ADMIN_DIR', 'admin_panel/libs/');
 require_once 'include/config.php';
-// Подключаем БД
+// BD
 require_once('connection/DBClass.php');
-//Создадим объект класса Smarty
+// Smarty
 require_once 'libs/Smarty.class.php';
 $smarty = new Smarty();
 require_once 'admin_panel/libs/setup.php';
 require_once 'include/include.php';
-require_once 'include/functions_admin.php';
+require_once 'include/include_admin.php';
+
 $arResult = getArResult(); //echo '<pre>'; print_r($arResult); echo '</pre>';
 
 if  ($arResult->UsernameEnter["enter"] == "Y" && !isset($_SESSION['once']) && isset( $_COOKIE['autologin'] ) ) autoLogin();
 OnlineUsers();
 
-$titlepage = 'Админ.панель';
 $rights = '';
 if ($arResult->UsernameEnter["group"] !='')
 {
@@ -85,34 +85,26 @@ switch($action)
 {
 		case 'products':
 			$left = '';
-            $smarty->assign('content', '');
+            $smarty->assign('content', products(ALL_R));
 			break;
 		default:
 			$left = '';
-            $smarty->assign('content', '');
+            $smarty->assign('content', products(ALL_R));
 			
 }
 
 
-//Выводим шаблон на экран
+//display main tamplate
 $smarty->display('main.tpl');
 
-function left()
+//functions
+function products($r)
 {
-    global $arResult;
-    global $smarty;
-    if($arResult->ACTION!=''){
-        $action = $arResult->ACTION;
-    }
+    //access();
+    access_rights($r);
+    unset($_SESSION['menu']);
 
-    $title_left = '<span class="title_leftMenu">МЕНЮ</span>';
-    $title_menu = 'title_menu';
-    $catalog_menu = catalog_menu(ALL_R);
-    $catalog_class = 'left-menu';
-    $html = file_get_contents( './templates/main_left.html' );
-    $html = str_replace( '{title_menu}', $title_menu, $html );
-    $html = str_replace( '{title_left}', $title_left, $html );
-    $html = str_replace( '{content1}', $catalog_menu, $html );
-    $html = str_replace( '{catalog_class}', $catalog_class, $html );
+    //СЃС‚СЂР°РЅРёС†С‹ РєР°С‚РµРіРѕСЂРёР№, РїРѕРґРєР°С‚РµРіРѕСЂРёР№ Рё С‚РѕРІР°СЂР°
+    $html = admin_product();
     return $html;
 }

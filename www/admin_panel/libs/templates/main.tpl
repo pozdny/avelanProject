@@ -1,15 +1,15 @@
 {$header}
     <div id="content_border">
         <div id="privet"></div>
-         <div id="content_big">
+         <div class="row">
              {$left}
-             <div class="CONTENT">
-                    <div id="main_block">
+             <div class="col-xs-9">
+
 
                          <div id="undermain">
                              {$content}
                          </div>
-                    </div>
+
              </div>
 
         </div>

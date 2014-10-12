@@ -28,6 +28,7 @@ if (!defined("SMARTY_DIR")) define('SMARTY_DIR', 'libs/');
 define('DEFAULT_PAGE', 'MainPage');
 define ( 'HOME_URL', "http://".$_SERVER['SERVER_NAME'] );
 define ( 'HOST_NAME', $_SERVER['SERVER_NAME'] );
+define ( 'ADMIN_PANEL', '/admin' );
 //table names
 define ( 'TABLE_USERS',       'users' );
 define ( 'TABLE_ADMIN_USERS', 'admin_users' );
@@ -54,7 +55,7 @@ define ( 'RESP_CAT',          'response_category' );
 define ( 'RESP_TXT',          'response' );
 define ( 'MANUF',             'manuf' );
 define ( 'OPTIONS',           'g_options' );
-// стили
+// style
 define ( 'STYLE1', 'class="style1"' );
 define ( 'STYLE2', 'class="style2"' );
 define ( 'STYLE3', 'class="style3"' );
@@ -72,7 +73,7 @@ define ( 'STYLE14', 'class="style14"' );
 define ( 'STYLE15', 'class="style15"' );
 define ( 'STYLE16', 'class="style16"' );
 define ( 'DOTTED', 'class="dotted"' );
-//путь изображения
+//img
 define ( 'PATH_IMG', '/img/' );
 define ( 'PATH_IMG_GLOB', 'img/catalog/' );
 define ( 'PATH_IMG_SMALL', 'img/catalog/small/' );
@@ -82,21 +83,25 @@ define ( 'PATH_IMG_BIGR', 'img/nashi_raboty/big/' );
 define ( 'PATH_IMG_SERVICES', 'img/services/' );
 define ( 'PATH_IMG_SERV_GLOB', 'img/services/catalog/' );
 define ( 'PATH_IMG_SERV_SMALL', 'img/services/small/' );
-// редирект на нужную страницу
+// redirect
 define ( 'REDIRECT_DELAY', 2 );
 define ( 'REDIRECT_DELAY2', 0 );
-//разное
+//different
 define ( 'REQUEST_URL', $_SERVER['REQUEST_URI'] );
 define ( 'SAPI_NAME', php_sapi_name());
 define ( 'BACK_IMG', '<i class="fa fa-caret-left"></i>');
+define ( 'TOP_IMG', '<i class="fa fa-caret-up" title="РІРІРµСЂС…"></i>');
 define ( 'SAVE_CODE', 'sfaj9a0jladqbmo');
 define ( 'COOKIE_TIME', 30 );
 define ( 'FIRST_PAGE', 'products' );
-// строка добавляется вконце при шифровании логина
+define ( 'EDIT_IMG', '<img src="/img/icons/edit_full.png" title="РїРѕР»РЅРѕРµ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ" />');
+define ( 'EDIT_IMG_K', '<img src="/img/icons/edit_key.png" title="РёР·РјРµРЅРёС‚СЊ РјРµС‚Р°С‚РµРіРё" />');
+define ( 'EDIT_IMG_Q', '<img src="/img/icons/edit_title.png" title="Р±С‹СЃС‚СЂРѕ РёР·РјРµРЅРёС‚СЊ РЅР°Р·РІР°РЅРёРµ РїРѕР·РёС†РёРё РїРѕ-СЂСѓСЃСЃРєРё" />');
+define ( 'DEL_IMG', '<img src="/img/icons/delete.png" title="СѓРґР°Р»РёС‚СЊ" />');
+// solt login, password
 define ( 'SALT_LOG', 'gu&@' );
-// строка добавляется вконце при шифровании пароля
 define ( 'SALT_PAS', '7J9$' );
-// права
+// rights
 define ( 'ALL_R', 'a,m' );
 define ( 'A_R', 'a' );
 define ( 'M_R', 'm' );

@@ -3,9 +3,9 @@
         <div id="foot_block">
             <div class="row">
                 <div class="col-xs-6">
-                    <span class="sansbold">© {$date} АВЕЛАН СЕРВИС</span>
+                    <span class="sansbold">В© {$date} РђР’Р•Р›РђРќ РЎР•Р Р’РРЎ</span>
                     <br>
-                    <span class="sanslight">Все права защищены</span>.
+                    <span class="sanslight">Р’СЃРµ РїСЂР°РІР° Р·Р°С‰РёС‰РµРЅС‹</span>.
                 </div>
                 <div class="col-xs-6 right-foot">
                     <div id="schets" class="{$class_true}">

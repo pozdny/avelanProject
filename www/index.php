@@ -1,25 +1,25 @@
 <?php
-if (!isset($_SESSION)) {
-    session_start(); print_r($_SESSION['MM_Username']);
+if (!isset($_SESSION)){
+    session_start();
 }
-// подключаем основные настройки
+// configs
 require_once 'include/config.php';
-// Подключаем БД
+// BD
 require_once('connection/DBClass.php');
-//Создадим объект класса Smarty
+// Smarty
 require_once 'libs/Smarty.class.php';
 $smarty = new Smarty();
 require_once 'libs/setup.php';
 require_once 'include/include.php';
-$arResult = getArResult(); echo '<pre>'; print_r($arResult); echo '</pre>';
+$arResult = getArResult(); //echo '<pre>'; print_r($arResult); echo '</pre>';
 if ( $arResult->ACTION == '' ) $arResult->ACTION = 'MainPage';
-//проверка на правильность адреса
+// error404
 if ( !in_array( $arResult->ACTION, $actions ) || ($arResult->ACTION == 'admin-panel' && $arResult->save_code !=SAVE_CODE) || $arResult->WRONGDATA){
     error404(SAPI_NAME, REQUEST_URL);
     return;
 }
-
-//Создание главного шаблона
+if(isset($arResult->UsernameEnter["enter"]) &&  $arResult->UsernameEnter["enter"] != "Y" && !isset($_SESSION['once']) && isset( $_COOKIE['autologin'] ) ) autoLogin();
+// main template
 $smarty->assign('header', head());
 $smarty->assign('arResult', $arResult);
 $smarty->assign('navbar', navigator());
@@ -32,7 +32,6 @@ $smarty->assign('backcall', $smarty->fetch('inner-tpl/forms/backcall/backcall.tp
 switch ($arResult->ACTION)
 {
     case 'MainPage':
-        //Передаем переменную в шаблонизатор Smarty
         $smarty->assign('content', MainPage());
         break;
     case 'about':
@@ -68,7 +67,7 @@ switch ($arResult->ACTION)
         $smarty->assign('action', $arResult->ACTION);
         $smarty->assign('content', MainPage());
 }
-//Выводим шаблон на экран
+//display main temlate
 $smarty->display('main.tpl');
 
 function MainPage()
@@ -246,14 +245,13 @@ function services(){
     }
     else
     {
-        //изображение
         $query = sprintf("SELECT img_service FROM ".TABLE_INFO);
         $mysqli->_execute($query);
         $row = $mysqli->fetch();
         if($row > 0 && $row['img_service'] !='')
         {
             $img_service = $row['img_service'];
-            $img = '<div id="img_services"><img src="/img/services/'.$img_service.'" alt="Услуги"></div>';
+            $img = '<div id="img_services"><img src="/img/services/'.$img_service.'" alt="пїЅпїЅпїЅпїЅпїЅпїЅ"></div>';
         }
         $content_page = catalog_services();
         $content_page.= $img.print_page($content);

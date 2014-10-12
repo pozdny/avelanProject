@@ -1531,4 +1531,46 @@ function OnlineUsers(){
     $online=count($data_array);
 
 }
+//автологин
+function autoLogin()
+{
+    $mysqli = M_Core_DB::getInstance();//echo '<pre>';print_r($_COOKIE);echo '</pre>';
+    $login    = $_COOKIE['name'];
+    $password = $_COOKIE['password'];
+    $login    = $login.SALT_LOG;
+    $password = $password.SALT_PAS;
+    // Выполняем запрос на получение данных пользователя из БД
+    $query = "SELECT *, UNIX_TIMESTAMP(last_visit) as unix_last_visit
+            FROM ".TABLE_ADMIN_USERS."
+            WHERE login='".md5($login )."'
+			AND password='".md5( $password )."'
+			LIMIT 1";
+    $mysqli->_execute($query);
+    // Если пользователь с таким логином и паролем не найден -
+    // значит данные неверные и надо их удалить
+    if ( $mysqli->num_rows() == 0 ) {
+        $tmppos = strrpos( $_SERVER['SERVER_NAME'], '/' ) + 1;
+        $path = substr( $_SERVER['SERVER_NAME'], 0, $tmppos );
+        setcookie( 'autologin', '', time() - 1, $path );
+        setcookie( 'name', '', time() - 1, $path );
+        setcookie( 'password', '', time() - 1, $path );
+        setcookie( 'group', '', time() - 1, $path );
+        return false;
+    }
+    $user = $mysqli->fetch();
+    $_SESSION['MM_Username'] = $user;//echo '<pre>';print_r( $_SESSION['MM_Username']);echo '</pre>';
+    $query = "SELECT * FROM ".TABLE_ADMIN_USERS."
+	        WHERE id=".$_SESSION['MM_Username']['id'] ;
+    $mysqli->_execute($query);
+    $res1 = $mysqli->fetch();
+
+    $_SESSION['last_visit'] = $res1;
+
+    $query = "UPDATE ".TABLE_ADMIN_USERS."
+	        SET last_visit=NOW()
+			WHERE id=".$_SESSION['MM_Username']['id'];
+    $mysqli->query($query);
+    $_SESSION['once'] = $res1;
+    return true;
+}
 

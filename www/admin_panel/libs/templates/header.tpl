@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=charset=utf-8"/>
     <meta name="robots" content="noindex, nofollow" />
     <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
     <link href="/css/admin_style.css" rel="stylesheet">
-    <title></title>
+    <title>{$titlepage}</title>
 
 </head>
 <body>
 <noscript>
-    <h2 align="center">Выключен JavaScript</h2>
+    <h2 align="center">РЅРµ РїРѕРґРєР»СЋС‡РµРЅ JavaScript</h2>
 </noscript>
 <!--conteyner-->
 <div class="contayner">
@@ -19,7 +20,7 @@
         <div class="head">
             <div id="head_admin">
                 <div id="head_admin_b">
-                    <a href=""><div id="logo_admin"></div></a>
+                    <a href="{$url}"><div id="logo_admin"></div></a>
                     <div id="head1_admin">
                         <div id="head2_admin">
                             <div align="center"></div>

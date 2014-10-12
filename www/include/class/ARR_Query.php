@@ -5,6 +5,9 @@ class ARR_Query {
     public $POS2;
     public $POS3;
     public $POS4;
+    public $DATA = array(
+        "AdminMenu" => array()
+    );
     public $PAGE_NUM;
     public $PAGE_NUM_BACK;
     public $save_code = '';
@@ -49,6 +52,21 @@ class ARR_Query {
                 $this->save_code = $array_url[1];
             }
         }
+        if($this->ACTION !='' && $this->ACTION == 'admin'){  // .............................Р°РґРјРёРЅ РїР°РЅРµР»СЊ
+            if(isset($array_url[1]) && $array_url[1] != ''){
+                $this->ACTION = $array_url[1];
+            }
+            if(isset($array_url[2]) && $array_url[2] != ''){
+                $this->POS1 = $array_url[2];
+            }
+            if(isset($array_url[3]) && $array_url[3] != ''){
+                $this->POS2 = $array_url[3];
+            }
+            if(isset($array_url[4]) && $array_url[4] != ''){
+                $this->POS3 = $array_url[4];
+            }
+
+        }
         if(isset($array_url[1]) && $array_url[1] !='')
 		{
 			$this->POS1 = $array_url[1];
@@ -81,19 +99,20 @@ class ARR_Query {
 		{
 			$this->PAGE_NUM_BACK = $_SESSION["pageNum_back"];
 		}
-        //данные об авторизации
-
-        if(isset($_SESSION['MM_Username']) && $_SESSION['MM_Username']!=''){echo '1';
+        //autorization
+        if(isset($_SESSION['MM_Username']) && $_SESSION["MM_Username"]!=''){
             $this->UsernameEnter["enter"] = 'Y';
-            $this->UsernameEnter["name"] = $_SESSION['MM_Username']['name'];
-            if(isset($_SESSION['last_visit']) && $_SESSION['last_visit'] !=''){
-                $this->UsernameEnter["last_date"] = $_SESSION['last_visit']['last_visit'];
+            $this->UsernameEnter["name"] = $_SESSION["MM_Username"]["name"];
+            if(isset($_SESSION["last_visit"]) && $_SESSION["last_visit"] !=''){
+                $this->UsernameEnter["last_date"] = $_SESSION["last_visit"]["last_visit"];
             }
-            $this->UsernameEnter["group"] = $_SESSION['MM_Username']["rights"];
-
+            $this->UsernameEnter["group"] = $_SESSION["MM_Username"]["rights"];
+            //РґРѕР±Р°РІР»СЏРµРј СЃРѕСЃС‚Р°РІ Р»РµРІРѕРіРѕ РјРµРЅСЋ РІ DATA
+            $adminmenu = new Menu('leftmenu', $this->UsernameEnter["group"]);
+            $this->DATA["AdminMenu"] = $adminmenu->Content;
         }
 
-        //значения для гирлянды и эффектов
+        //girld
 		/*$query = "SELECT option_value FROM ".OPTIONS." WHERE option_name LIKE 'gerld'";
 		$k = mysql_query($query) or die(mysql_error());
 		$row_k = mysql_fetch_assoc($k);
