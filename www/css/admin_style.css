@@ -49,9 +49,11 @@ body{
 {
 	overflow:hidden;
 	width:100%;
-	height:80px;
-	margin:5px auto 0;
+	height:100px;
+	margin:0 auto;
+    padding:20px 0 5px;
 	background: #274B7F;
+    position: relative;
 
 }
 #footer{
@@ -79,7 +81,7 @@ body{
 }
 #head1_admin
 {
-	height:120px;
+	height:75px;
 	width:83%;
 	float:left
 }

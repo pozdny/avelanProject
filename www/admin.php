@@ -3,7 +3,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 // configs
-define('SMARTY_ADMIN_DIR', 'admin_panel/libs/');
+if (!defined("SMARTY_ADMIN_DIR"))  define('SMARTY_ADMIN_DIR', 'admin_panel/libs/');
 require_once 'include/config.php';
 // BD
 require_once('connection/DBClass.php');
@@ -87,6 +87,10 @@ switch($action)
 			$left = '';
             $smarty->assign('content', products(ALL_R));
 			break;
+        case 'logout':
+            $left = '';
+            $smarty->assign('content', logout());
+        break;
 		default:
 			$left = '';
             $smarty->assign('content', products(ALL_R));

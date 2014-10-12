@@ -3,7 +3,6 @@ Options +FollowSymLinks
 RewriteEngine On
 RewriteBase /
 
-
 RewriteRule ^catalog/ventilyatsionnoye-oborudovaniye$  /catalog/ventilyatsionnoye-oborudovaniye/ventilyatory [R=301,L]
 RewriteRule ^catalog/konditsionery$  /catalog/konditsionery/split-sistemy [R=301,L]
 RewriteRule ^catalog/teplovoye-oborudovaniye$  /catalog/teplovoye-oborudovaniye/teplovyye-zavesy [R=301,L]
@@ -18,12 +17,6 @@ RewriteRule (.*) http://авелан.рф/$1 [R=301,L]
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.(php|html|htm)\ HTTP/
 RewriteRule ^index.(php|html|htm)$ http://авелан.рф [R=301,L]
 
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /admin\.php\ HTTP/
-RewriteRule ^admin\.php$ /admin/products [R=301,L]
-RewriteRule ^admin$ /admin/products [R=301,L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^admin/(.*)$ admin.php?action=$1 [L,QSA]
 
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
 RewriteRule ^index\.php$ / [R=301,L]
@@ -31,7 +24,8 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?action=$1 [L,QSA]
 
-AddDefaultCharset utf-8
+
+AddDefaultCharset windows-1251
 
 AddType text/x-component .htc
 

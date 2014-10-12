@@ -24,6 +24,7 @@
         {*подключаем навигатор*}
         {$navbar}
         <div class="container">
+            {$hello}
             <div class="row block-1">
                 <div class="col-xs-4 logo-block {$class_true}">
                     <div class="row">

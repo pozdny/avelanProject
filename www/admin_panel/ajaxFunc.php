@@ -174,7 +174,7 @@ function login(){
                 setcookie( 'autologin', 'yes', time() + 3600*24*COOKIE_TIME, "/");
             }
 
-            $rez = 'yes';
+            $rez = 'ok';
 
         }
         else

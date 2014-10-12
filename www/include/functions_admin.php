@@ -5,6 +5,7 @@
  * Date: 10.10.14
  * Time: 14:20
  */
+
 function admin_head()
 {
     global $smarty;
@@ -20,10 +21,12 @@ function admin_head()
     $now_date = $date_d.' '.$date_m.' '.date('Y').', '.$date_w;
     $date = '<span '.STYLE9.'><span '.DOTTED.'>'.$now_date.'</span></span>';
     $titlepage = 'Админ. панель';
+    $hello = hello();
     $smarty->assign('title', $title);
     $smarty->assign('url', $url);
     $smarty->assign('date', $date);
     $smarty->assign('titlepage', $titlepage);
+    $smarty->assign('hello', $hello);
     $html = $smarty->fetch('header.tpl');
     return $html;
 }
@@ -47,8 +50,6 @@ function left()
             || ((in_array($action, $array_dif_tab)) && $eng_menu == $array_dif_tab[0])
             || 'edit_'.$eng_menu == $action
         )? $li_menu = "active" : $li_menu = "";
-
-
         $li.='<li class="'.$li_menu.'"><a href="/admin/'.$eng_menu.'">'.$title_menu.'</a>';
 
         $li.='</li>';
@@ -224,4 +225,145 @@ function admin_product(){
     //$html.=view_add_menu();
     $html.='<a href="#top">'.TOP_IMG.' Наверх</a>';
     return $html;
+}
+//...............функция приветствия.....................//
+function hello(){
+    global $arResult;
+    global $smarty;
+    $html = '';
+    if(isset($arResult->UsernameEnter) && $arResult->UsernameEnter["enter"] == 'Y')
+    {
+        $time = $arResult->UsernameEnter["last_date"];
+        if($time == '0000-00-00 00:00:00')
+        {
+            $time =  get_string_time(time());
+        }
+        else
+        {
+            $time = date( "d.m.Y, H:i:s", strtotime($time));
+        }
+        $name = $arResult->UsernameEnter["name"];
+        $online = getOnlineUsers().', ';
+        $logout = '&nbsp;&nbsp;<a href="/admin/logout" '.STYLE3.'>выход</a>';
+
+        $smarty->assign('name', $name);
+        $smarty->assign('time', $time);
+        $smarty->assign('online', $online);
+        $smarty->assign('logout', $logout);
+        $html = $smarty->fetch('inner-tpl/hello.tpl');
+    }
+    return $html;
+}
+function get_string_time($date){
+    $date_time_array = getdate( $date );
+    $mon = $date_time_array['mon'];
+    $mday = $date_time_array['mday'];
+    $year = $date_time_array['year'];
+    $hours = $date_time_array['hours'];
+    $minutes = $date_time_array['minutes'];
+    $seconds = $date_time_array['seconds'];
+    $time = $year.'-'.$mon.'-'.$mday.' '.$hours.':'.$minutes.':'.$seconds;
+    $time = date( "d.m.Y, H:i:s", strtotime($time));
+    return $time;
+}
+function getOnlineUsers(){
+    $data = "./files/online.dat";
+    $time = time();
+    $past_time = time()-600;
+    $online_array = array();
+    $readdata = fopen($data,"r") or die("Не могу открыть файл $data");
+    $data_array = file($data);
+    fclose($readdata);
+
+    if (getenv('HTTP_X_FORWARDED_FOR'))
+        $user = getenv('HTTP_X_FORWARDED_FOR');
+    else
+        $user = getenv('REMOTE_ADDR');
+
+    $d=count($data_array);
+    for($i=0;$i<$d;$i++)
+    {
+        list($live_user,$last_time)=explode("::","$data_array[$i]");
+        if($live_user!=""&&$last_time!=""):
+            if($last_time<$past_time):
+                $live_user="";
+                $last_time="";
+            endif;
+            if($live_user!=""&&$last_time!="")
+            {
+                if($user==$live_user)
+                {
+                    $online_array[]="$user::$time\r\n";
+                }
+                else
+                    $online_array[]="$live_user::$last_time";
+            }
+        endif;
+    }
+
+    if(isset($online_array)):
+        foreach($online_array as $i=>$str)
+        {
+            if($str=="$user::$time\r\n")
+            {
+                $ok=$i;
+                break;
+            }
+        }
+        foreach($online_array as $j=>$str)
+        {
+            if($ok==$j) { $online_array[$ok]="$user::$time\r\n"; break;}
+        }
+    endif;
+
+    $writedata=fopen($data,"w") or die("Не могу открыть файл $data");
+    flock($writedata,2);
+    if($online_array=="") $online_array[]="$user::$time\r\n";
+    foreach($online_array as $str)
+        fputs($writedata,"$str");
+    flock($writedata,3);
+    fclose($writedata);
+
+    $readdata=fopen($data,"r") or die("Не могу открыть файл $data");
+    $data_array=file($data);
+    fclose($readdata);
+    $online=count($data_array);
+    switch ($online)
+    {
+        case 1:
+            $icon = '&nbsp;<img src="'.HOME_URL.'/img/icons/User.png" width=12px id="img_user"/>'."\n";
+            $stroka = ' посетитель';
+            break;
+        case 2:
+        case 3:
+        case 4:
+            $stroka = ' посетителя';
+            $icon = '&nbsp;<img src="'.HOME_URL.'/img/icons/Users.png" width=12px id="img_users"/>'."\n";
+            break;
+        default:
+            $icon = '&nbsp;<img src="'.HOME_URL.'/img/icons/Users.png" width=12px id="img_users"/>'."\n";
+            $stroka = ' посетителей';
+    }
+
+    $online = $icon.' Он-лайн:&nbsp;<strong>'.$online.'</strong><a href="'.ADMIN_PANEL.'/online">'.$stroka.'</a>';
+    return $online;
+}
+//Выход
+function logout(){
+    //to fully log out a visitor we need to clear the session varialbles
+    if ( isset( $_COOKIE['autologin'] ) ) setcookie( 'autologin', '', time() - 1, "/");
+    $_SESSION['MM_Username'] = NULL;
+    $_SESSION['once'] = NULL;
+    $_SESSION['last_visit'] = NULL;
+    unset($_SESSION['MM_Username']);
+    unset($_SESSION['once']);
+    unset($_SESSION['last_visit']);
+    $logoutGoTo = HOME_URL;
+    if ($logoutGoTo)
+    {
+        header("Location: $logoutGoTo");
+        exit;
+    }
+
+
 }

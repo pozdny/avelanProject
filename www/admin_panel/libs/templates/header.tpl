@@ -18,8 +18,9 @@
     <!--main-->
     <div class="main">
         <div class="head">
-            <div id="head_admin">
-                <div id="head_admin_b">
+            <div class="row">
+                <div class="col-xs-12">
+                    {$hello}
                     <a href="{$url}"><div id="logo_admin"></div></a>
                     <div id="head1_admin">
                         <div id="head2_admin">
@@ -30,8 +31,5 @@
                         </div>
                     </div>
                 </div>
-                <noindex>
-                    <div id="head2" class="style5"></div>
-                </noindex>
             </div>
         </div>

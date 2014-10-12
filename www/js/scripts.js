@@ -363,12 +363,13 @@ $(document).ready(function() {
         backdrop: true,
         show: true
     });
-    var close = $(".close, .close-foot");
+    var close = $(".close, .close-foot, #loginModal");
     close.on('click', function(){
         location.href = loc;
     })
     var login = $("#login-form");
-    login.on('click', function(){
+    login.on('click', function(e){
+        e.stopPropagation();
         loginForm();
     })
     function loginForm(){
@@ -389,7 +390,7 @@ $(document).ready(function() {
                     if(error_row) error_row.remove();
 
                     if(rez == 'ok'){
-                        //location.href = 'admin';
+                        location.href = 'admin';
                     }
                     else{console.log(data.rez);
                         password.after('<div class="col-lg-6 col-lg-offset-3" id="error_row"><div class=" style3" id="error_mess"></div></div>');

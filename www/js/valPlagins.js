@@ -138,9 +138,9 @@
 
         // HTML templates
         tpl: {
-            redLabel  : '<a title="Îòêðûòü/çàêðûòü êàòàëîã" id="red-label" href="javascript:;"></a>',
-            closeBtn : '<a title="Çàêðûòü êàòàëîã" class="leftnav-item leftnav-btn-close" href="javascript:;"></a>',
-            openBtn  : '<a title="Îòêðûòü/çàêðûòü êàòàëîã" class="leftnav-item leftnav-btn-open" href="javascript:;"></a>',
+            redLabel  : '<a title="ÐžÑ‚ÐºÑ€Ñ‹Ñ‚ÑŒ/Ð·Ð°ÐºÑ€Ñ‹Ñ‚ÑŒ ÐºÐ°Ñ‚Ð°Ð»Ð¾Ð³" id="red-label" href="javascript:;"></a>',
+            closeBtn : '<a title="Ð—Ð°ÐºÑ€Ñ‹Ñ‚ÑŒ ÐºÐ°Ñ‚Ð°Ð»Ð¾Ð³" class="leftnav-item leftnav-btn-close" href="javascript:;"></a>',
+            openBtn  : '<a title="ÐžÑ‚ÐºÑ€Ñ‹Ñ‚ÑŒ/Ð·Ð°ÐºÑ€Ñ‹Ñ‚ÑŒ ÐºÐ°Ñ‚Ð°Ð»Ð¾Ð³" class="leftnav-item leftnav-btn-open" href="javascript:;"></a>',
             fixedDiv  : '<div id="fixed-div"></div>'
         }
     }

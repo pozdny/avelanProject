@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2014-10-06 16:06:33
+<?php /* Smarty version Smarty-3.1.18, created on 2014-10-12 19:21:47
          compiled from "libs\templates\inner-tpl\calc\calc-power.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:142345432a1e9c37643-91438127%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '107f3da539c64c9a97fa51d5fcbab9a09d36330c' => 
     array (
       0 => 'libs\\templates\\inner-tpl\\calc\\calc-power.tpl',
-      1 => 1412603775,
+      1 => 1413098657,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.18',
+  'unifunc' => 'content_5432a1e9ce47d9_68690222',
   'variables' => 
   array (
     'title' => 0,
@@ -22,8 +24,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'footer_txt' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.18',
-  'unifunc' => 'content_5432a1e9ce47d9_68690222',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5432a1e9ce47d9_68690222')) {function content_5432a1e9ce47d9_68690222($_smarty_tpl) {?><div class="col-sm-12 form-power">
 	<div class="panel panel-default">

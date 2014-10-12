@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2014-10-12 13:12:53
+<?php /* Smarty version Smarty-3.1.18, created on 2014-10-12 18:40:03
          compiled from "admin_panel\libs\templates\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:654754379176ca6773-13503145%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '04cdc4dfa4a8e313992151f270587a233aab674d' => 
     array (
       0 => 'admin_panel\\libs\\templates\\header.tpl',
-      1 => 1413112373,
+      1 => 1413132001,
       2 => 'file',
     ),
   ),
@@ -20,6 +20,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'variables' => 
   array (
     'titlepage' => 0,
+    'hello' => 0,
     'url' => 0,
   ),
   'has_nocache_code' => false,
@@ -45,8 +46,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <!--main-->
     <div class="main">
         <div class="head">
-            <div id="head_admin">
-                <div id="head_admin_b">
+            <div class="row">
+                <div class="col-xs-12">
+                    <?php echo $_smarty_tpl->tpl_vars['hello']->value;?>
+
                     <a href="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
 "><div id="logo_admin"></div></a>
                     <div id="head1_admin">
@@ -58,8 +61,5 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                         </div>
                     </div>
                 </div>
-                <noindex>
-                    <div id="head2" class="style5"></div>
-                </noindex>
             </div>
         </div><?php }} ?>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2014-09-30 09:27:30
+<?php /* Smarty version Smarty-3.1.18, created on 2014-10-12 17:00:08
          compiled from "libs\templates\inner-tpl\perelink-title.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:19659542a5b624482e7-54238422%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '79fdcf6f4f96f8efd7b90efe1e4a839962ddc00d' => 
     array (
       0 => 'libs\\templates\\inner-tpl\\perelink-title.tpl',
-      1 => 1412061902,
+      1 => 1413125315,
       2 => 'file',
     ),
   ),
@@ -15,8 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
-  'has_nocache_code' => false,
   'version' => 'Smarty-3.1.18',
   'unifunc' => 'content_542a5b6247e7c6_43963562',
+  'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_542a5b6247e7c6_43963562')) {function content_542a5b6247e7c6_43963562($_smarty_tpl) {?><h3>Также наша Компания занимается реализацией следующих товаров в г. Новосибирск:</h3><?php }} ?>
+<?php if ($_valid && !is_callable('content_542a5b6247e7c6_43963562')) {function content_542a5b6247e7c6_43963562($_smarty_tpl) {?><h3>РўР°РєР¶Рµ РЅР°С€Р° РљРѕРјРїР°РЅРёСЏ Р·Р°РЅРёРјР°РµС‚СЃСЏ СЂРµР°Р»РёР·Р°С†РёРµР№ СЃР»РµРґСѓСЋС‰РёС… С‚РѕРІР°СЂРѕРІ РІ Рі. РќРѕРІРѕСЃРёР±РёСЂСЃРє:</h3><?php }} ?>

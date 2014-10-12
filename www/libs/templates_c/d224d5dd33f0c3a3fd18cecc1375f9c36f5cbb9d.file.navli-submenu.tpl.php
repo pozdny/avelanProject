@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2014-10-01 19:14:15
+<?php /* Smarty version Smarty-3.1.18, created on 2014-10-12 17:00:04
          compiled from "libs\templates\inner-tpl\catalog-menu\navli-submenu.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:268385428f864840689-73760651%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'd224d5dd33f0c3a3fd18cecc1375f9c36f5cbb9d' => 
     array (
       0 => 'libs\\templates\\inner-tpl\\catalog-menu\\navli-submenu.tpl',
-      1 => 1412183654,
+      1 => 1413098657,
       2 => 'file',
     ),
   ),

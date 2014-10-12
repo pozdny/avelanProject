@@ -14,6 +14,7 @@ spl_autoload_register(array('Autoloader', 'loadClasses'));
 //подключение функций
 require_once 'functions_global.php';
 require_once 'functions.php';
+require_once 'functions_admin.php';
 require_once 'library.php';
 require_once 'string.php';
 require_once 'functions_catalog.php';

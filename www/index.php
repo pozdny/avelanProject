@@ -19,6 +19,7 @@ if ( !in_array( $arResult->ACTION, $actions ) || ($arResult->ACTION == 'admin-pa
     return;
 }
 if(isset($arResult->UsernameEnter["enter"]) &&  $arResult->UsernameEnter["enter"] != "Y" && !isset($_SESSION['once']) && isset( $_COOKIE['autologin'] ) ) autoLogin();
+OnlineUsers();
 // main template
 $smarty->assign('header', head());
 $smarty->assign('arResult', $arResult);
@@ -251,7 +252,7 @@ function services(){
         if($row > 0 && $row['img_service'] !='')
         {
             $img_service = $row['img_service'];
-            $img = '<div id="img_services"><img src="/img/services/'.$img_service.'" alt="������"></div>';
+            $img = '<div id="img_services"><img src="/img/services/'.$img_service.'" alt="Услуги"></div>';
         }
         $content_page = catalog_services();
         $content_page.= $img.print_page($content);

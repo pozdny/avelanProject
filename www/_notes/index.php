@@ -2,8 +2,8 @@
 // подключаем основные настройки
 require_once 'include/config.php';
 // подключаем базу данных
-//require_once('connection/connect.php');
-
+// Подключаем БД
+require_once('connection/DBClass.php');
 //Создадим объект класса Smarty
 require_once 'libs/Smarty.class.php';
 $smarty = new Smarty();
@@ -25,7 +25,8 @@ $smarty->assign('title_main', title_main());
 $smarty->assign('bread_crumbs', bread_crumbs($arrayBreadCrumbs));
 $smarty->assign('footer', footer());
 $smarty->assign('response', '');
-$smarty->assign('calc', CALC);
+$smarty->assign('calc', $smarty->fetch('inner-tpl/forms/calculator/calc.tpl'));
+$smarty->assign('backcall', $smarty->fetch('inner-tpl/forms/backcall/backcall.tpl'));
 switch ($arResult->ACTION)
 {
     case 'MainPage':
@@ -96,7 +97,6 @@ function MainPage()
         }
 
     }
-
     $smarty->assign('li_tab', $li_tab);
     $tab_view = $smarty->fetch('inner-tpl/tab-view/tab-view.tpl');
     $smarty->assign('tab_pane', $tab_pane);
@@ -159,13 +159,12 @@ function catalog()
     else{
         $action1 = DEFAULT_PAGE;
     }
-    $query = sprintf("SELECT id, title, titlepage, content, keywords, description FROM ".NAVIGATOR." WHERE eng LIKE '%s'", $action1);
-    $mysqli->_execute($query);
-    $row = $mysqli->fetch();
-    $title = $row['title'];
-    $key_id = $row['id'];
+
     if($arResult->POS1 == '')
     {
+        $query = sprintf("SELECT content FROM ".NAVIGATOR." WHERE eng LIKE '%s'", $action1);
+        $mysqli->_execute($query);
+        $row = $mysqli->fetch();
         $content_page = print_page($row['content']);
     }
     elseif($arResult->POS1 !='' && $arResult->POS2 !='' && $arResult->POS3 == ''){
@@ -181,12 +180,12 @@ function catalog()
         }
     }
     elseif($arResult->POS1 !='' && $arResult->POS2 !='' && $arResult->POS3!= ''){
+
         $content_page = catalog_pos3();
     }
     elseif($arResult->POS1 !='' && $arResult->POS2 ==''){
         error404(SAPI_NAME, REQUEST_URL);
     }
-    $smarty->assign('title', $title);
     $smarty->assign('content', $content_page);
     $html = $smarty->fetch('inner-tpl/content-page.tpl');
     return $html;
@@ -248,7 +247,7 @@ function services(){
         if($row > 0 && $row['img_service'] !='')
         {
             $img_service = $row['img_service'];
-            $img = '<div id="img_services"><img src="/img/services/'.$img_service.'" width="100%" alt="Услуги"></div>';
+            $img = '<div id="img_services"><img src="/img/services/'.$img_service.'" alt="Услуги"></div>';
         }
         $content_page = catalog_services();
         $content_page.= $img.print_page($content);

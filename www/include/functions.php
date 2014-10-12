@@ -1,4 +1,5 @@
 <?php
+
 //..............................шапка..................................//
 function head()
 {
@@ -7,13 +8,12 @@ function head()
     global $arResult;
     if($arResult->UsernameEnter["enter"] == "Y"){
         $class_true = 'block-true';
+        $hello = hello();
     }
     else{
         $class_true = 'block-false';
+        $hello = '';
     }
-
-    $action = '/result_search';
-
 
     $navbar = navigator();
     $titlepage = header_meta("titlepage");
@@ -28,6 +28,7 @@ function head()
     $smarty->assign('description', $description);
     $smarty->assign('keywords', $keywords);
     $smarty->assign('search_form', $search_form);
+    $smarty->assign('hello', $hello);
     $html = $smarty->fetch('header.tpl');
     return $html;
 }
@@ -775,7 +776,6 @@ function nashi_rabotyMain()
 //.................функция листания.........................//
 function listanije($totalPages, $pageNum, $filename, $u, $admin='', $k='')
 {
-    header("Content-type: text/html; Charset=windows-1251");
     $html = '';
     $uri = $filename;
     if ( $_SERVER['QUERY_STRING'] != '' )
@@ -1468,12 +1468,12 @@ function GetFormValue($in_Val, $trim_Val = 0, $u_Case = false, $trim_symbols=fal
 }
 /*....................Количество юзеров on-line......................*/
 function OnlineUsers(){
-    $data="./files/online.dat";
-    $time=time();
-    $past_time=time()-600;
+    $data = "./files/online.dat";
+    $time = time();
+    $past_time = time()-600;
     $online_array = array();
-    $readdata=fopen($data,"r") or die("Не могу открыть файл $data");
-    $data_array=file($data);
+    $readdata = fopen($data,"r") or die("Не могу открыть файл $data");
+    $data_array = file($data);
     fclose($readdata);
 
     if (getenv('HTTP_X_FORWARDED_FOR'))
@@ -1481,7 +1481,7 @@ function OnlineUsers(){
     else
         $user = getenv('REMOTE_ADDR');
 
-    $d=count($data_array);
+    $d = count($data_array);
     for($i=0;$i<$d;$i++)
     {
         list($live_user,$last_time)=explode("::","$data_array[$i]");
@@ -1517,9 +1517,14 @@ function OnlineUsers(){
         }
     endif;
 
-    $writedata=fopen($data,"w") or die("Не могу открыть файл $data");
+    $writedata = fopen($data,"w") or die("Не могу открыть файл $data");
     flock($writedata,2);
-    if($online_array=="") $online_array[]="$user::$time\r\n";
+    if(sizeof($online_array) == 0){
+        $online_array[]="$user::$time\r\n";
+    }
+    else{
+        //print_r(sizeof($online_array));
+    }
     foreach($online_array as $str)
         fputs($writedata,"$str");
     flock($writedata,3);
@@ -1573,4 +1578,5 @@ function autoLogin()
     $_SESSION['once'] = $res1;
     return true;
 }
+
 
