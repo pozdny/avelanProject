@@ -1,0 +1,1 @@
+<a data-fancybox-type="iframe" href="/modal/response" id="responseI"><img src="/img/main/response.png" id="respImg" alt="Отзывы"/></a>

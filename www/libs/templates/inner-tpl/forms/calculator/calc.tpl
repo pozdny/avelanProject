@@ -1,0 +1,1 @@
+<a href="/raschet-moshchnosti-oborudovaniya" id="calc-power"><img src="/img/main/calc-power.png" id="calcImg" alt="Калькулятор"/></a>

@@ -1,0 +1,1 @@
+<tr ><td>{$title}</td><td class="border_price">{$ed}</td><td class="border_price">{$price}</td></tr>

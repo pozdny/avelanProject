@@ -1,0 +1,423 @@
+/* CSS Document */
+/*............head...............................*/
+html
+{
+    height:100%;
+    background:#fff;
+}
+* html body {
+    height:100%;
+
+}
+body{
+    background:none;
+    font: normal 12px Tahoma, Geneva, sans-serif;
+    width:100%;
+    height:100%;
+    margin:0;
+    padding: 0;
+}
+.contayner{
+    width:95%;
+    min-width:980px;
+    max-width:1050px;
+    height:100%;
+    margin:0 auto;
+    padding: 0;
+    position: relative; /* Opera 9.5 */
+}
+.main{
+    width:100%;
+    min-height: 100%;
+    height:auto;
+    position:relative;
+    overflow:hidden;
+    margin:0 auto -49px auto;
+}
+#content_border{
+    height:auto;
+    margin:0;
+    position:static;
+
+}
+#content_big{
+    margin:0 0 0 280px;
+
+}
+.CONTENT{
+    width:100%;
+    position:static;
+    float:left;
+    display: inline;
+    min-height:100%;
+}
+#main_block{
+    width:99%;
+    overflow:hidden;
+    padding-left:5px;
+
+}
+#undermain{
+    position:relative;
+    width:100%;
+    text-align: justify;
+}
+.footer-pusher{
+	background: none
+}
+.head
+{
+	overflow:hidden;
+	width:100%;
+	height:80px;
+	margin:5px auto 0;
+	background: #274B7F;
+
+}
+#footer{
+    height: 50px;
+    width:100%;
+    position:absolute;
+    background:#FFF;
+
+}
+.footer-pusher{
+    height:65px;
+    clear: both;
+    background:#fff
+}
+#main_foot{
+    padding:8px 5px;
+}
+#head_admin{
+	height:80px;
+	
+}
+#head_admin_b
+{
+	clear:both;
+}
+#head1_admin
+{
+	height:120px;
+	width:83%;
+	float:left
+}
+#logo_admin{
+	width:73px;
+	height:60px;
+	background-image: url(../img/main/logo.png);
+	background-repeat:no-repeat;
+    margin:10px 0 0 5px;
+	float:left;
+}
+#head2_admin
+{
+	width:100%;
+	height:10px;
+	color:#fff;
+	padding-top:30px;
+	margin-bottom:20px;
+}
+#head_date
+{
+	width:200px;
+	height:20px;
+	text-align:right;
+	padding-right:10px;
+	float:right
+}
+/*............table...............................*/
+.a_kat_title a
+{
+	cursor:pointer;
+	text-decoration:none;
+	line-height:1.9;
+	width:100%;
+}
+
+.a_kat_subtitle ul
+{
+	margin:0;
+	padding:0;
+	list-style-type:none
+}
+.a_kat_subtitle ul li
+{
+	text-align:left
+}
+.a_kat_subtitle ul li a
+{
+	cursor:pointer;
+	line-height:1.9;
+}
+.a_kat_subtitle ul li a:hover
+{
+	color:#000;
+	text-decoration:underline;
+}
+
+/*.......collapse.......*/
+.a_color_line
+{
+	overflow:hidden;
+	background:#797979;
+	height:26px;
+	width:100%;
+	padding:8px 0 0 0;
+	font:bold 14px Tahoma, Geneva, sans-serif;
+	color:#fff;
+	text-align:center;
+	-webkit-border-radius: 5px 5px 0 0;
+	-moz-border-radius: 5px 5px 0 0;
+	border-radius: 5px 5px 0 0;
+	behavior: url(http://xn--80aafm4an.xn--p1ai/css/PIE.htc);
+	
+}
+.a_dop
+{
+	display: block;
+}
+/*...........product..........*/
+.submenu_prod td
+{
+	background: url(../img/main/blue_grad.jpg) repeat-x;
+	height:30px
+}
+.submenu_td2 td
+{
+	background: url(../img/main/grey_grad_tab.jpg) repeat-x;
+	height:30px;
+}
+.submenu_td3 td
+{
+	background:#e7e7e7;
+}
+.submenu_td4 td
+{
+	background:#FFC59F;
+}
+.submenu_td td
+{
+	background: url(../images/main/orange_grad_tab.jpg) repeat-x;
+	height:30px;
+}
+.submenu_prod td .style1
+{
+	color:#fff;
+	font:normal bold  13px Tahoma;
+}
+.a_dop_product
+{
+	display: block;
+}
+.admin_table
+{
+	border:solid 1px #999;
+	width:100%;	
+	border-collapse:collapse;
+	margin-bottom:10px;
+	background:#fff;
+}
+.submenu_prod td .style1, .admin_table .submenu_td2 td .style1, .submenu_prod td .style3,  .submenu_td2 td .style9, .admin_table .submenu_td2 td .style10, .submenu_td2 td .style3, .submenu_td3 td div, .submenu_td4 td div, .admin_table .submenu_td3, .admin_table .submenu_td td 
+{
+	padding:0 5px;
+}
+.admin_table td
+{
+	border:solid 1px #999;
+	height:30px;
+}
+
+.admin_table th
+{
+	border:solid 1px #999;
+	text-align:center;
+}
+
+.table_all
+{
+	
+	width:100%;
+	border-collapse:collapse;
+	background:#fff
+}
+.table_all td
+{
+	padding-left:1px;
+	border:solid 1px #dcdedb;
+	
+}
+.img_edit
+{
+	cursor:pointer
+}
+.form_add_menu
+{
+	margin:10px 0;
+}
+fieldset
+{
+	background:#d3d1d1;
+	margin:0;
+	
+}
+
+legend, legend a
+{
+	font:bold 14px Tahoma, Geneva, sans-serif;
+	border-bottom:1px dotted #000;
+	color:#ed2525;
+	
+}
+.edit_block_img
+{
+	float:left;
+	margin-right:5px;
+}
+
+.showTable  
+{
+  border-collapse: separate;
+  background-color: #FFF;
+  empty-cells: show;  
+  border: 1px #a2a0a0 solid;
+  width: 83%;
+  border-spacing: 1px;
+  margin:5px 0; 
+  
+  
+}
+.showTable th 
+{
+	font-size: 14px; 
+	font-weight : bold;
+	background-color: #AFAFAF; 
+	height: 25px;
+	text-align:center;
+	
+}
+.showTable td
+{ 
+  background-color: #2D87C0;
+  padding: 4px;
+  
+}
+.showAT td
+{
+	background-color: #E9E9E9;
+    padding: 4px;
+}
+select option
+{
+	width:300px;
+}
+.rright_admin
+{
+	text-align:right;
+}
+.lleft_admin
+{
+	text-align:left;
+}
+.ccenter_admin
+{
+	text-align:center;
+}
+.admin_tr td
+{
+	border-bottom:solid 1px #CCC
+}
+.zebra_order 
+{
+	margin-top:5px;
+    width: 100%; /* ������ ������� */
+    border-collapse: collapse; /* ������� ������� ����� ����� ����� */
+}
+
+.zebra_order td, .zebra_order th
+{
+ 	 padding:4px;
+}
+.zebra_order td 
+{
+	background-color: #FCFCFC;
+}
+.th_class th
+{
+
+	border-bottom:solid 1px #000
+}
+.ordinary_table
+{
+	border-collapse: collapse;
+}
+.tr_class
+{
+	text-align:right
+}
+/*.... edit_menu.....*/
+.length_edit
+{
+	width:9%;
+	height:20px;
+	float:left;
+	text-align:right;
+}
+.length_edit_2
+{
+	width:88%;
+	height:20px;
+	float:left;
+}
+.table_edit_menu
+{
+	background:#e9e9e9;
+	border:1px dotted #333;
+	width:100%;
+}
+.input_div
+{
+	width:3%;
+	height:20px;
+	float:left
+}
+#table_add_img .big_block_img, #table_add_imgIcon .big_block_img
+{
+	border:1px dotted #ed2525;
+	margin-bottom:5px
+}
+.notice_block
+{
+	border:1px solid #ed2525;
+	margin:5px 0;
+	padding:4px;
+}
+.div_name_img
+{
+	float:left
+}
+.new_mess:hover
+{
+	cursor:pointer
+}
+.messageNew
+{
+	float:left
+}
+.classHidden a
+{
+	color:#D83A61;
+}
+.classHidden a.style1
+{
+	color:#D83A61;
+}
+/* editor */
+#bx_btn_InsertOrderedList
+{
+	width:20px;
+	height:20px;
+	background-image:url(../img/icon/_global_iconkit.gif);
+	background-position: -200px -20px!important;
+}
