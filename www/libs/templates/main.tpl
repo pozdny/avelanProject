@@ -5,7 +5,7 @@
 {$two_class = "" }
 <!--wrap-->
 <div id="wrap" >
-    {if $action eq 'services' || $action eq 'nashi_raboty'}
+    {if ($action eq 'services' || $action eq 'nashi_raboty') && $pos1!= ''}
         {$two_class = "two-columns" }
     {/if}
     <div class="container {$two_class}">
@@ -17,7 +17,8 @@
                     {$left_menu}
                 </div>
                 <div class="col-xs-9">
-                    <div class="jumbotron" id="content-page" >
+                    <div class="jumbotron" role="main" id="content-page" >
+                        {$edit}
                         {$bread_crumbs}
                         <h1 class="page-title">{$title_main}</h1>
                         {$content}
@@ -28,7 +29,8 @@
         {else}
         <div class="row">
             <div class="col-xs-12">
-                <div class="jumbotron" id="content-page">
+                <div class="jumbotron" role="main" id="content-page">
+                    {$edit}
                     {$bread_crumbs}
                     <h1 class="page-title">{$title_main}</h1>
                     {$content}
@@ -45,9 +47,9 @@
     {/if}
 </div>
 <!--/wrap-->
-{$response}
 {$calc}
 {$backcall}
+{$response}
 {*подключаем футер шаблона*}
 {$footer}
 

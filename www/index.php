@@ -19,17 +19,19 @@ if ( !in_array( $arResult->ACTION, $actions ) || ($arResult->ACTION == 'admin-pa
     return;
 }
 if(isset($arResult->UsernameEnter["enter"]) &&  $arResult->UsernameEnter["enter"] != "Y" && !isset($_SESSION['once']) && isset( $_COOKIE['autologin'] ) ) autoLogin();
-OnlineUsers();
+$Services = $arResult->DATA["Services"];
 // main template
 $smarty->assign('header', head());
 $smarty->assign('arResult', $arResult);
 $smarty->assign('navbar', navigator());
+$smarty->assign('edit', getEdit());
 $smarty->assign('title_main', title_main());
 $smarty->assign('bread_crumbs', bread_crumbs($arrayBreadCrumbs));
 $smarty->assign('footer', footer());
 $smarty->assign('response', '');
 $smarty->assign('calc', $smarty->fetch('inner-tpl/forms/calculator/calc.tpl'));
 $smarty->assign('backcall', $smarty->fetch('inner-tpl/forms/backcall/backcall.tpl'));
+$smarty->assign('response', $smarty->fetch('inner-tpl/forms/response/response.tpl'));
 switch ($arResult->ACTION)
 {
     case 'MainPage':
@@ -76,15 +78,15 @@ function MainPage()
     global $smarty;
     $mysqli = M_Core_DB::getInstance();
     $id = 1;
-    $query = sprintf("SELECT content FROM ".NAVIGATOR." WHERE id=%s", $id);
-    //$k = mysql_query($query) or die(mysql_error());
-    //$row_k = mysql_fetch_assoc($k);
+    $query = sprintf("SELECT zagolovok,content FROM ".NAVIGATOR." WHERE id=%s", $id);
     $mysqli->_execute($query);
     $row = $mysqli->fetch();
-    $content = $row["content"];
+    $content = print_page($row["content"]);
+    $main_title = $row["zagolovok"];
     //.......TAB-VIEW
     $query = 'SELECT '.SERVICES.'.title, '.SERVICES.'.eng FROM '.SERVICES.'
-	     	  ORDER BY '.SERVICES.'.id';
+              WHERE '.SERVICES.'.eng NOT LIKE "default%"
+	     	  ORDER BY '.SERVICES.'.id LIMIT 0,4';
     $mysqli->_execute($query);
     $li_tab = '';
     $tab_pane = '';
@@ -149,6 +151,8 @@ function MainPage()
     $smarty->assign('main_tab_view', $main_tab_view);
     $smarty->assign('content', $content);
     $smarty->assign('main_carousel', $main_carousel);
+    $smarty->assign('title', $main_title);
+    $smarty->assign('edit_link', getEdit());
     $html = $smarty->fetch('inner-tpl/main-page.tpl');
 
     return $html;

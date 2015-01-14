@@ -17,20 +17,19 @@ class Menu {
     private function getTopMenu(){
         $mysqli = M_Core_DB::getInstance();
         $query = "SELECT *
-		          FROM ".NAVIGATOR;
+		          FROM ".NAVIGATOR." ORDER BY id LIMIT 0,8";
         $mysqli->_execute($query);
         while($row = $mysqli->fetch()){
             $arr_menu[] = array(
                 "id" => $row["id"],
                 "title" => $row["title"],
+                "link" => $row["eng"],
                 "zagolovok" => $row["zagolovok"],
-                "link" => $row["link"],
                 "content" => $row["content"],
                 "titlepage" => $row["titlepage"],
                 "keywords" => $row["keywords"],
-                "description" => $row["description"],
-                "category" => $row["category"],
-                "top_menu" => $row["top_menu"]
+                "description" => $row["description"]
+
             );
         }
         $this->Content = $arr_menu;

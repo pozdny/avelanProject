@@ -99,6 +99,16 @@
     font-style: normal;
 
 }
+@font-face {
+    font-family: 'WWFlakesRegular';
+    src: url('fonts/wwflakes-webfont.eot');
+    src: local('☺'),
+    url('fonts/wwflakes-webfont.woff') format('woff'),
+    url('fonts/wwflakes-webfont.ttf') format('truetype');
+    /* src: local('WWFlakes'), local('WWFlakes'), url('clientscript/fonts/wwflakes-webfont.woff') format('woff'), url('clientscript/fonts/wwflakes-webfont.ttf') format('truetype'); */
+    font-weight: normal;
+    font-style: normal;
+}
 /*
 	==================
 	[MAIN]
@@ -243,6 +253,9 @@ a .logo-block{
 .company-email{
     text-shadow: 1px 2px 1px #313131;
 }
+.servise-info{
+    padding-left:35px;
+}
 .logo-desc{
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.3em;
@@ -253,10 +266,14 @@ a .logo-block{
     letter-spacing:0.1em
 }
 .servise-info .text{
+    display: block;
+    float: none;
     color:#dbdbdb;
 }
 .servise-info .phone{
-    font-size: 1.5em;
+    float:left;
+    display: block;
+    font-size: 1.3em;
 }
 .company-phone{
     text-align: right;
@@ -347,7 +364,7 @@ a .logo-block{
     color:#fff
 }
 #hello a.style3{
-    color: #ae191e;
+    color: #f14003;
 }
 /*
 	==================
@@ -643,7 +660,8 @@ ul.ul_total{
     overflow:hidden;
     clear: both;
     min-width:250px;
-    margin-top:25px
+    margin-top:25px;
+    background: #f0f0f0;
 }
 #left-menu ul li{
     width:100%
@@ -740,7 +758,7 @@ footer .sanslight{
     padding:3px 0 0 10px;
     float:right;
 }
-.schet
+.schets
 {
     width:90px;
     height:32px;
@@ -1267,6 +1285,10 @@ input.text-danger {
 a:hover{
     cursor: pointer;
 }
+h2{
+    font-size:1.6em;
+    margin-bottom: 5px;
+}
 h3{
     font-size: 1em;
     font-weight: 700;
@@ -1318,9 +1340,101 @@ hr{
     text-decoration:none;
     margin-left:15px;
 }
+.style7{
+    color: #666;
+    text-decoration:none
+}
 .style9{
     color:#fff;
     text-decoration:none
+}
+.style13{
+      font-weight: bold;
+      color:#000;
+      text-decoration:none
+}
+.style15{
+    font-size:1.2em;
+    font-weight: bold;
+    color:#000;
+    text-decoration:none
+}
+.text10{
+    font-size: 10px;
+}
+.text13{
+    font-size: 13px;
+}
+.text14{
+    font-size: 14px;
+}
+.text15{
+    font-size: 15px;
+}
+blockquote {
+    padding: 15px 20px;
+    margin: 5px 0;
+    border-left: 5px solid #264B7E;
+    background: #fff;
+    color:#666;
+    font-size: 12px;
+    clear:both
+}
+.orange{
+    color:#ff3202;
+}
+.green{
+    color:#5A8D2E;
+}
+.blue{
+    color:#2c52e3;
+}
+.darkblue{
+    color:darkblue
+}
+#buttonEdit {
+    position: absolute;
+    top:10px;
+    right: 15px;
+    width: 26px;
+    height: 26px;
+}
+#buttonEdit a{
+    float: right;
+    height: 20px;
+    width: 20px;
+    color:#6cb44d
+}
+#buttonEdit a:hover{
+    color:#337317
+}
+
+/*
+	==================
+	[GERLD]
+	==================
+*/
+#gerland{
+    background-image:url('../img/main/gerld.png');
+    position: absolute;
+    top:220px;
+    height:36px;
+    width:100%;
+    overflow:
+        hidden;
+    z-index:99
+}
+#nums_1{
+    visibility:hidden
+}
+.gerland_2{
+    background-position: 0 -36px
+}
+.gerland_3{
+    background-position: 0 -72px
+}
+.gerland_4{
+    background-position: 0 -108px
 }
 /*
 	==================
@@ -1396,8 +1510,6 @@ hr{
     background: rgba(31, 118, 38, 0.7);
     padding:10px 10px ;
     top: 230px;
-    margin-bottom:20px;
-    margin-top:20px;
     z-index:1000
 }
 
@@ -1438,6 +1550,16 @@ span.error{
     color:red
 
 }
+label.error{
+    position: absolute;
+    bottom:-25px;
+    display: block;
+    width:100%;
+    padding:3px;
+    color:red;
+    font-weight: normal;
+
+}
 span.error i.fa{
     color:#6CB44D
 }
@@ -1446,7 +1568,6 @@ span.error i.fa{
     height: 22px;
     margin-top:-5px;
     margin-bottom:8px;
-    text-align: center;
     float: left;
 }
 #resultOrderInner{
@@ -1454,6 +1575,7 @@ span.error i.fa{
     display:none;
     color:#6CB44D;
     font-weight: bold;
+    text-align: center;
 }
 #blankButtonBack{
     width:100px;
@@ -1483,19 +1605,27 @@ span.error i.fa{
 	==================
 */
 #responseI{
+    width:32px;
+    height: 199px;
+    background-image:  url("../img/main/response.png");
+    background-repeat: no-repeat;
+    position: fixed;
     left: 0;
     margin: 0 0 0 -2px;
     padding: 0;
-    position: fixed;
-    top: 240px;
+    top: 230px;
     z-index: 10;
+}
+#responseI:hover{
+    cursor: pointer;
+    margin-left:0px
 }
 #calc-power{
     margin: 0 -2px 0 0;
     padding: 0;
     position: fixed;
     right: 0;
-    top: 320px;
+    top: 300px;
     z-index: 10;
 }
 /*

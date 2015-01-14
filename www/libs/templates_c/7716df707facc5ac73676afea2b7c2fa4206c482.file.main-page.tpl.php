@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2014-10-12 09:49:47
+<?php /* Smarty version Smarty-3.1.18, created on 2014-10-27 21:36:22
          compiled from "libs\templates\inner-tpl\main-page.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:17741541ffcdf405ca3-87450287%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7716df707facc5ac73676afea2b7c2fa4206c482' => 
     array (
       0 => 'libs\\templates\\inner-tpl\\main-page.tpl',
-      1 => 1413098657,
+      1 => 1414442180,
       2 => 'file',
     ),
   ),
@@ -21,6 +21,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   array (
     'main_tab_view' => 0,
     'main_carousel' => 0,
+    'edit_link' => 0,
+    'title' => 0,
     'content' => 0,
   ),
   'has_nocache_code' => false,
@@ -44,7 +46,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <div class="row">
     <div class="col-xs-12">
         <div class="jumbotron" id="jumbotron-three">
-            <h1 class="page-title">О нас</h1>
+            <?php echo $_smarty_tpl->tpl_vars['edit_link']->value;?>
+
+            <h1 class="page-title"><?php echo $_smarty_tpl->tpl_vars['title']->value;?>
+</h1>
             <div class="page-content">
                 <?php echo $_smarty_tpl->tpl_vars['content']->value;?>
 

@@ -178,7 +178,7 @@ function catalog_pos3()
                     $content.= '<div class="cat_text">'.print_page($row['content2']).'</div>';
                 }
 
-                /*выводим таблицу с ценами*/
+
                 $dop4 = '';
                 if($pos1 == 'teplovoye-oborudovaniye')
                 {
@@ -276,14 +276,13 @@ function catalog_pos3()
             }
 
         }
-        else
-        {
+        else{
             $query = 'SELECT '.CATALOG_ALL.'.id, '.CATALOG_ALL.'.title, '.CATALOG_ALL.'.content, '.CATALOG_ALL.'.content2  FROM '.CATALOG_ALL.' WHERE '.CATALOG_ALL.'.eng LIKE "'.$pos3.'"';
             $mysqli->_execute($query);
             $row = $mysqli->fetch();
             $content = get_pos3_view($pos2, $pos3);
         }
-        //перелинковка
+        //perelink
         $perelink = perelinkContent($pos1, $row['id'],  $pos3);
         $content.=$perelink;
         return $content;
@@ -429,7 +428,7 @@ function get_vent($row_s, $price, $markfull)
             || $markfull == 'reshetki-nastennyye' || $markfull == 'reshetki-naruzhnyye' || $markfull == 'diffuzory-kruglyye'
             || $markfull == 'gibkiye-vozdukhovody' || $markfull == 'filtry-sistem-ventilyatsii'){
 
-            $val = '<th>Розница, руб.</th>';
+            $val = '<th>Р РѕР·РЅРёС†Р°, СЂСѓР±.</th>';
             $smarty->assign('val', $val);
             $header_main = $smarty->fetch('inner-tpl/tables/header-main-vent.tpl');
         }
@@ -548,7 +547,7 @@ function get_konditsionery($row_s, $price, $mark, $markfull)
                 $col ='colspan="7"';
 
             }
-            //выводим изображения
+
             if($block_single !='')
             {
                 $title = $block_single;
@@ -716,7 +715,7 @@ function get_teplo($row_s, $price, $markfull)
             {
                 $col ='colspan="8"';
             }
-            //выводим изображения
+            //..
             if($block_single !='')
             {
                 $title = $block_single;

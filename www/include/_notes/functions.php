@@ -1,5 +1,6 @@
 <?php
-//..............................шапка..................................//
+
+//..............................С€Р°РїРєР°..................................//
 function head()
 {
     $mysqli = M_Core_DB::getInstance();
@@ -7,31 +8,12 @@ function head()
     global $arResult;
     if($arResult->UsernameEnter["enter"] == "Y"){
         $class_true = 'block-true';
+        $hello = hello();
     }
     else{
         $class_true = 'block-false';
+        $hello = '';
     }
-    $query = "SELECT company_phone FROM ".TABLE_INFO;
-    $mysqli->_execute($query);
-    $row_a = $mysqli->fetch();
-    $tel = $row_a['company_phone'];
-
-    $query = "SELECT company_name FROM ".TABLE_INFO;
-    $mysqli->_execute($query);
-    $row_a = $mysqli->fetch();
-    $title_site = $row_a['company_name'];
-
-    $query = "SELECT title, content FROM ".SHADULE." WHERE id=1";
-    $mysqli->_execute($query);
-    $row_s = $mysqli->fetch();
-    $shad1 = $row_s['title'].' '.$row_s['content'];
-
-    $query = "SELECT title, content FROM ".SHADULE." WHERE id=2";
-    $mysqli->_execute($query);
-    $row_s = $mysqli->fetch();
-    $shad2 = $row_s['title'].' '.$row_s['content'];
-    $action = '/result_search';
-
 
     $navbar = navigator();
     $titlepage = header_meta("titlepage");
@@ -46,11 +28,11 @@ function head()
     $smarty->assign('description', $description);
     $smarty->assign('keywords', $keywords);
     $smarty->assign('search_form', $search_form);
+    $smarty->assign('hello', $hello);
     $html = $smarty->fetch('header.tpl');
     return $html;
 }
-function footer()
-{
+function footer(){
     $mysqli = M_Core_DB::getInstance();
     global $arResult;
     global $smarty;
@@ -154,20 +136,20 @@ function header_meta($str){
         $row = $mysqli->fetch();
         if($str == 'titlepage'){
             $result = $row['titlepage'];
-            if(empty($result)) $result = 'Авелан';
+            if(empty($result)) $result = 'РђРІРµР»Р°РЅ';
         }
         elseif($str == 'description'){
             $result = $row['description'];
-            if(empty($result)) $result = 'Кондиционеры и тепловентиляционное оборудование в Новосибирске';
+            if(empty($result)) $result = 'РљРѕРЅРґРёС†РёРѕРЅРµСЂС‹ Рё С‚РµРїР»РѕРІРµРЅС‚РёР»СЏС†РёРѕРЅРЅРѕРµ РѕР±РѕСЂСѓРґРѕРІР°РЅРёРµ РІ РќРѕРІРѕСЃРёР±РёСЂСЃРєРµ';
         }
         elseif($str == 'keywords'){
             $result = $row['keywords'];
-            if(empty($result)) $result = 'Кондиционеры и тепловентиляционное оборудование в Новосибирске';
+            if(empty($result)) $result = 'РљРѕРЅРґРёС†РёРѕРЅРµСЂС‹ Рё С‚РµРїР»РѕРІРµРЅС‚РёР»СЏС†РёРѕРЅРЅРѕРµ РѕР±РѕСЂСѓРґРѕРІР°РЅРёРµ РІ РќРѕРІРѕСЃРёР±РёСЂСЃРєРµ';
         }
     }
     return $result;
 }
-//..............................навигация..................................//
+//..............................РЅР°РІРёРіР°С†РёСЏ..................................//
 function navigator()
 {
     $mysqli = M_Core_DB::getInstance();
@@ -216,7 +198,7 @@ function navigator()
     $html = $smarty->fetch('navbar.tpl');
     return $html;
 }
-//...........генератор заголовков..............
+//...........РіРµРЅРµСЂР°С‚РѕСЂ Р·Р°РіРѕР»РѕРІРєРѕРІ..............
 function title_main()
 {
     $mysqli = M_Core_DB::getInstance();
@@ -325,18 +307,19 @@ function title_main()
 
     return $title;
 }
-//...................функция для услуг.............................//
+//...................С„СѓРЅРєС†РёСЏ РґР»СЏ СѓСЃР»СѓРі.............................//
 function catalog_services()
 {
     $mysqli = M_Core_DB::getInstance();
     global $arResult; //echo '<pre>';print_r($arResult);echo '</pre>';
-    $query = 'SELECT '.SERVICES.'.id, '.SERVICES.'.title, '.SERVICES.'.eng FROM '.SERVICES.'
-	     	  ORDER BY '.SERVICES.'.id';
+    $query = "SELECT ".SERVICES.".id, ".SERVICES.".title, ".SERVICES.".eng FROM ".SERVICES."
+              WHERE ".SERVICES.".eng NOT LIKE 'default%'
+	     	  ORDER BY ".SERVICES.".id";
     $mysqli->_execute($query);
     $html = '';
 
     $html.= '<hr>';
-    //$html.='<b>Более подробную информацию об услугах можно получить перейдя в интересующий раздел по ссылкам ниже:</b><br>';
+    //$html.='<b>Р‘РѕР»РµРµ РїРѕРґСЂРѕР±РЅСѓСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± СѓСЃР»СѓРіР°С… РјРѕР¶РЅРѕ РїРѕР»СѓС‡РёС‚СЊ РїРµСЂРµР№РґСЏ РІ РёРЅС‚РµСЂРµСЃСѓСЋС‰РёР№ СЂР°Р·РґРµР» РїРѕ СЃСЃС‹Р»РєР°Рј РЅРёР¶Рµ:</b><br>';
     $html.= '<ul class="ul_total">';
     while($row_s = $mysqli->fetch())
     {
@@ -355,7 +338,7 @@ function catalog_services_pos1()
     $mysqli = M_Core_DB::getInstance();
     global $arResult;
     global $smarty;
-    $html = '';
+    $html = $block_img = '';
     if($arResult->POS1 !='')
     {
         $pos1 = $arResult->POS1;
@@ -410,9 +393,9 @@ function catalog_services_pos1()
     }
     return $html;
 }
-// .............................поиск изображения...........................//
-function FindImg($img, $path, $tab, $id)
-{
+// .............................РїРѕРёСЃРє РёР·РѕР±СЂР°Р¶РµРЅРёСЏ...........................//
+function FindImg($img, $path, $tab, $id){
+    $mysqli = M_Core_DB::getInstance();
     $img_empty = 'empty.jpg';
     $image_dir_path = $_SERVER["DOCUMENT_ROOT"] . PATH_IMG.$path;
     $image_dir = opendir($image_dir_path);
@@ -428,13 +411,11 @@ function FindImg($img, $path, $tab, $id)
     }
     closedir($image_dir);
     $image_files_count = count($image_files);
-    if ($image_files_count)
-    {
+    if ($image_files_count){
         sort($image_files);
         for ($i = 0; $i <$image_files_count; $i++)
         {
-            if($image_files[$i] == $img)
-            {
+            if($image_files[$i] == $img){
                 return $img;
             }
         }
@@ -444,10 +425,10 @@ function FindImg($img, $path, $tab, $id)
     $query = sprintf("UPDATE ".$tab." SET img=%s  WHERE id=%s",
         GetSQLValueString($img_empty, "text"),
         GetSQLValueString($id, "int"));
-    mysql_query($query);
+    $mysqli->query($query);
     return $img_empty;
 }
-//..............................функция ошибок.............................//
+//..............................С„СѓРЅРєС†РёСЏ РѕС€РёР±РѕРє.............................//
 function error404($sapi_name, $request_url)
 {
     if ($sapi_name == 'cgi' || $sapi_name == 'cgi-fcgi')
@@ -559,7 +540,8 @@ function left_menu(){
     $pos3 = $arResult->POS3;
     if($action == 'services'){
         $query = "SELECT ".SERVICES.".id, ".SERVICES.".title, ".SERVICES.".eng FROM ".SERVICES."
-			  ORDER BY ".SERVICES.".id";
+                  WHERE ".SERVICES.".eng NOT LIKE 'default%'
+			      ORDER BY ".SERVICES.".id";
     }
     elseif($action == 'nashi_raboty'){
         $query = "SELECT * FROM ".RABOTY."
@@ -595,7 +577,7 @@ function left_menu(){
     $html = $smarty->fetch('inner-tpl/left-menu/left-menu.tpl');
     return $html;
 }
-//...........крошки..............
+//...........РєСЂРѕС€РєРё..............
 function bread_crumbs($arrayBreadCrumbs)
 {
     $mysqli = M_Core_DB::getInstance();
@@ -784,16 +766,15 @@ function nashi_rabotyMain()
         }
         else
         {
-            $html = '<div align="center">Пунктов нет</div>';
+            $html = '<div align="center">РџСѓРЅРєС‚РѕРІ РЅРµС‚</div>';
         }
         return $html;
     }
 }
 
-//.................функция листания.........................//
+//.................С„СѓРЅРєС†РёСЏ Р»РёСЃС‚Р°РЅРёСЏ.........................//
 function listanije($totalPages, $pageNum, $filename, $u, $admin='', $k='')
 {
-    header("Content-type: text/html; Charset=windows-1251");
     $html = '';
     $uri = $filename;
     if ( $_SERVER['QUERY_STRING'] != '' )
@@ -811,8 +792,8 @@ function listanije($totalPages, $pageNum, $filename, $u, $admin='', $k='')
     }
     if ( $totalPages > 1 )
     {
-        // Проверяем нужна ли стрелка "В начало"
-        // Находим две ближайшие станицы с обоих краев, если они есть
+        // РџСЂРѕРІРµСЂСЏРµРј РЅСѓР¶РЅР° Р»Рё СЃС‚СЂРµР»РєР° "Р’ РЅР°С‡Р°Р»Рѕ"
+        // РќР°С…РѕРґРёРј РґРІРµ Р±Р»РёР¶Р°Р№С€РёРµ СЃС‚Р°РЅРёС†С‹ СЃ РѕР±РѕРёС… РєСЂР°РµРІ, РµСЃР»Рё РѕРЅРё РµСЃС‚СЊ
         $tpr = '';
         $tpl = '';
         $r=1;
@@ -1076,8 +1057,8 @@ function listanije($totalPages, $pageNum, $filename, $u, $admin='', $k='')
             $tpr=$tpr.$endpage;
         }
 
-        $html = '<div class="pusher"></div><div class="bottomBreadcrumbs"><ul><li class="titleList">Страница:</li>';
-        // Выводим меню
+        $html = '<div class="pusher"></div><div class="bottomBreadcrumbs"><ul><li class="titleList">РЎС‚СЂР°РЅРёС†Р°:</li>';
+        // Р’С‹РІРѕРґРёРј РјРµРЅСЋ
         $html.= $tpl.'<li class="current"><a href="#">'.$pageNum .'</a></li>'.$tpr;
         $html.='</ul></div><div class="pusher"></div>'."\n";
     }
@@ -1122,7 +1103,7 @@ function nashi_raboty_pos1(){
         $row_img = $mysqli->fetchAssoc($x);
 
         $totalRows = $mysqli->num_r($x);
-        //выберем весь массив фотографий для этой категории
+        //РІС‹Р±РµСЂРµРј РІРµСЃСЊ РјР°СЃСЃРёРІ С„РѕС‚РѕРіСЂР°С„РёР№ РґР»СЏ СЌС‚РѕР№ РєР°С‚РµРіРѕСЂРёРё
         $query = "SELECT * FROM ".RABOTY_IMG." WHERE ".RABOTY."_id=".$arResult->POS1." ORDER BY ".RABOTY_IMG.".id";;
         $mysqli->_execute($query);
         $array = array();
@@ -1182,7 +1163,7 @@ function nashi_raboty_pos1(){
                 $html.= $block_img.backLinkG();
             }
             else{
-                $html = '<div align="center">Пунктов нет</div>';
+                $html = '<div align="center">РџСѓРЅРєС‚РѕРІ РЅРµС‚</div>';
                 $html.= backLinkG();
             }
             return $html;
@@ -1198,7 +1179,7 @@ function backLinkG()
     {
         $back_page = '/'.$arResult->PAGE_NUM_BACK;
     }
-    $back = BACK_IMG.' '.'<a href="/'.$arResult->ACTION.$back_page.'" >весь список работ</a>';
+    $back = BACK_IMG.' '.'<a href="/'.$arResult->ACTION.$back_page.'" >РІРµСЃСЊ СЃРїРёСЃРѕРє СЂР°Р±РѕС‚</a>';
     return $back;
 }
 //...........................LINKS SEARCH...................//
@@ -1275,7 +1256,9 @@ function getSearch(){
         $query = "SELECT ".CATALOG_ALL.".title, ".CATALOG_ALL.".eng AS all_eng, ".CATALOG_SUBMENU.".eng AS submenu_eng, ".CATALOG_MENU.".eng AS menu_eng FROM ".CATALOG_ALL."
 			  INNER JOIN ".CATALOG_SUBMENU." ON ".CATALOG_ALL.".submenu_id = ".CATALOG_SUBMENU.".id
 			  INNER JOIN ".CATALOG_MENU." ON ".CATALOG_SUBMENU.".menu_id = ".CATALOG_MENU.".id
-			  WHERE MATCH(".CATALOG_ALL.".title, ".CATALOG_ALL.".content, ".CATALOG_ALL.".eng) AGAINST('".$search_word."' IN BOOLEAN MODE) ".$like;
+			  WHERE MATCH(".CATALOG_ALL.".title, ".CATALOG_ALL.".content, ".CATALOG_ALL.".eng) AGAINST('".$search_word."' IN BOOLEAN MODE) ".$like."
+			  AND ".CATALOG_SUBMENU.".eng NOT LIKE 'default%'
+			  AND ".CATALOG_ALL.".eng NOT LIKE 'default%'";
         $all = $mysqli->queryQ($query);
         $row_all = $mysqli->fetchAssoc($all);
         if($row_all == 0)
@@ -1283,21 +1266,25 @@ function getSearch(){
             $query = "SELECT ".CATALOG_ALL.".title, ".CATALOG_ALL.".eng AS all_eng, ".CATALOG_SUBMENU.".eng AS submenu_eng, ".CATALOG_MENU.".eng AS menu_eng FROM ".CATALOG_ALL."
 			  INNER JOIN ".CATALOG_SUBMENU." ON ".CATALOG_ALL.".submenu_id = ".CATALOG_SUBMENU.".id
 			  INNER JOIN ".CATALOG_MENU." ON ".CATALOG_SUBMENU.".menu_id = ".CATALOG_MENU.".id
-			  WHERE ".CATALOG_ALL.".title LIKE '%".$search_word."%' OR ".CATALOG_ALL.".content LIKE '%".$search_word."%'";
+			  WHERE ".CATALOG_ALL.".title LIKE '%".$search_word."%' OR ".CATALOG_ALL.".content LIKE '%".$search_word."%'
+              AND ".CATALOG_SUBMENU.".eng NOT LIKE 'default%'
+			  AND ".CATALOG_ALL.".eng NOT LIKE 'default%'";
             $all = $mysqli->queryQ($query);
             $row_all = $mysqli->fetchAssoc($all);
         }
 
         $query = "SELECT ".CATALOG_SUBMENU.".title, ".CATALOG_SUBMENU.".eng AS submenu_eng, ".CATALOG_MENU.".eng AS menu_eng FROM ".CATALOG_SUBMENU."
 			  INNER JOIN ".CATALOG_MENU." ON ".CATALOG_SUBMENU.".menu_id = ".CATALOG_MENU.".id
-			  WHERE MATCH(".CATALOG_SUBMENU.".title, ".CATALOG_SUBMENU.".eng) AGAINST('".$search_word."' IN BOOLEAN MODE) ".$like1;
+			  WHERE MATCH(".CATALOG_SUBMENU.".title, ".CATALOG_SUBMENU.".eng) AGAINST('".$search_word."' IN BOOLEAN MODE) ".$like1."
+			  AND ".CATALOG_SUBMENU.".eng NOT LIKE 'default%'";
         $submenu = $mysqli->queryQ($query);
         $row_submenu = $mysqli->fetchAssoc($submenu);
         if($row_submenu == 0)
         {
             $query = "SELECT ".CATALOG_SUBMENU.".title, ".CATALOG_SUBMENU.".eng AS submenu_eng, ".CATALOG_MENU.".eng AS menu_eng FROM ".CATALOG_SUBMENU."
 			  INNER JOIN ".CATALOG_MENU." ON ".CATALOG_SUBMENU.".menu_id = ".CATALOG_MENU.".id
-			  WHERE ".CATALOG_SUBMENU.".title LIKE '%".$search_word."%' OR ".CATALOG_SUBMENU.".eng LIKE '%".$search_word."%'";
+			  WHERE ".CATALOG_SUBMENU.".title LIKE '%".$search_word."%' OR ".CATALOG_SUBMENU.".eng LIKE '%".$search_word."%'
+			  AND ".CATALOG_SUBMENU.".eng NOT LIKE 'default%'";
             $submenu = $mysqli->queryQ($query);
             $row_submenu = $mysqli->fetchAssoc($submenu);
         }
@@ -1358,16 +1345,16 @@ function getSearch(){
         }
         else
         {
-            $html.='По Вашему запросу ничего не найдено';
+            $html.='РџРѕ Р’Р°С€РµРјСѓ Р·Р°РїСЂРѕСЃСѓ РЅРёС‡РµРіРѕ РЅРµ РЅР°Р№РґРµРЅРѕ';
         }
     }
     else
     {
-        $html = 'Введите поисковое слово или фразу';
+        $html = 'Р’РІРµРґРёС‚Рµ РїРѕРёСЃРєРѕРІРѕРµ СЃР»РѕРІРѕ РёР»Рё С„СЂР°Р·Сѓ';
     }
     $num_total = $num_menu + $num_submenu + $num_all + $num_desc;
     $kon = endWord($num_total);
-    $str = '<div ><span class="dotted"><span class="style1">'.$search_word.'</span></span><br />Найдено <span class="style1">'.$num_total.'</span> строк'.$kon.'</div><br />'."\n";
+    $str = '<div ><span class="dotted"><span class="style1">'.$search_word.'</span></span><br />РќР°Р№РґРµРЅРѕ <span class="style1">'.$num_total.'</span> СЃС‚СЂРѕРє'.$kon.'</div><br />'."\n";
     $html = $str.$html;
     return $html;
 }
@@ -1382,11 +1369,11 @@ function endWord($count){
     {
         switch($num)
         {
-            case 1: $str = 'а';
+            case 1: $str = 'Р°';
                 break;
             case 2:
             case 3:
-            case 4: $str = 'и';
+            case 4: $str = 'Рё';
                 break;
 
             default: $str = '';
@@ -1407,8 +1394,8 @@ function raschet_moshchnosti_oborudovaniya(){
         $row = $mysqli->fetch();
 
         $html = print_page($row['content']);
-        $html.= '<div class="col-sm-12 a-power"><a href="/raschet-moshchnosti-oborudovaniya/condicioner" class="text-primary small-caps">расчет мощности кондиционера</a></div>';
-        $html.= '<div class="col-sm-12 a-power"><a href="/raschet-moshchnosti-oborudovaniya/teplovie-pushki" class="text-primary small-caps">расчет мощности тепловой пушки</a></div>';
+        $html.= '<div class="col-sm-12 a-power"><a href="/raschet-moshchnosti-oborudovaniya/condicioner" class="text-primary small-caps">СЂР°СЃС‡РµС‚ РјРѕС‰РЅРѕСЃС‚Рё РєРѕРЅРґРёС†РёРѕРЅРµСЂР°</a></div>';
+        $html.= '<div class="col-sm-12 a-power"><a href="/raschet-moshchnosti-oborudovaniya/teplovie-pushki" class="text-primary small-caps">СЂР°СЃС‡РµС‚ РјРѕС‰РЅРѕСЃС‚Рё С‚РµРїР»РѕРІРѕР№ РїСѓС€РєРё</a></div>';
     }
     else{
         $pos1 = $arResult->POS1;
@@ -1430,8 +1417,8 @@ function calc_cond()
 {
     global $smarty;
     /*.....conditioner.............*/
-    $title   = 'Расчет мощности кондиционера';
-    $footer_txt = 'Ознакомиться с ценами на кодиционеры вы можете перейдя по данной ссылке: <a href="/catalog/konditsionery" class="text-primary small-caps">кондиционеры</a>';
+    $title   = 'Р Р°СЃС‡РµС‚ РјРѕС‰РЅРѕСЃС‚Рё РєРѕРЅРґРёС†РёРѕРЅРµСЂР°';
+    $footer_txt = 'РћР·РЅР°РєРѕРјРёС‚СЊСЃСЏ СЃ С†РµРЅР°РјРё РЅР° РєРѕРґРёС†РёРѕРЅРµСЂС‹ РІС‹ РјРѕР¶РµС‚Рµ РїРµСЂРµР№РґСЏ РїРѕ РґР°РЅРЅРѕР№ СЃСЃС‹Р»РєРµ: <a href="/catalog/konditsionery" class="text-primary small-caps">РєРѕРЅРґРёС†РёРѕРЅРµСЂС‹</a>';
     $content = $smarty->fetch('inner-tpl/calc/calc-cond.tpl');
     $smarty->assign('title', $title);
     $smarty->assign('content', $content);
@@ -1443,8 +1430,8 @@ function calc_pushki()
 {
     global $smarty;
     /*.....teplo...................*/
-    $title = 'Расчет мощности тепловой пушки';
-    $footer_txt = 'Ознакомиться с ценами на тепловые пушки вы можете перейдя по данной ссылке: <a href="/catalog/teplovoye-oborudovaniye/teplovyye-pushki" class="text-primary small-caps">тепловые пушки</a>';
+    $title = 'Р Р°СЃС‡РµС‚ РјРѕС‰РЅРѕСЃС‚Рё С‚РµРїР»РѕРІРѕР№ РїСѓС€РєРё';
+    $footer_txt = 'РћР·РЅР°РєРѕРјРёС‚СЊСЃСЏ СЃ С†РµРЅР°РјРё РЅР° С‚РµРїР»РѕРІС‹Рµ РїСѓС€РєРё РІС‹ РјРѕР¶РµС‚Рµ РїРµСЂРµР№РґСЏ РїРѕ РґР°РЅРЅРѕР№ СЃСЃС‹Р»РєРµ: <a href="/catalog/teplovoye-oborudovaniye/teplovyye-pushki" class="text-primary small-caps">С‚РµРїР»РѕРІС‹Рµ РїСѓС€РєРё</a>';
     $content = $smarty->fetch('inner-tpl/calc/calc-teplo.tpl');
     $smarty->assign('title', $title);
     $smarty->assign('content', $content);
@@ -1452,12 +1439,12 @@ function calc_pushki()
     $html = $smarty->fetch('inner-tpl/calc/calc-power.tpl');
     return $html;
 }
-/**  Функция убирает пробелы, экранирует ковычки...........................................
- * Возвращает безопасное значение, с удаленным html и php кодом
-* @param string $in_Val - исходное значение
-* @param int $trim_Val - если больше 0, то оставляет только указанное количество символов
-* @param bool $u_Case - если true, то возвращает заглавные буквы
-* @param bool $trim_symbols - если true, то возвращает только цифры до первой буквы
+/**  Р¤СѓРЅРєС†РёСЏ СѓР±РёСЂР°РµС‚ РїСЂРѕР±РµР»С‹, СЌРєСЂР°РЅРёСЂСѓРµС‚ РєРѕРІС‹С‡РєРё...........................................
+ * Р’РѕР·РІСЂР°С‰Р°РµС‚ Р±РµР·РѕРїР°СЃРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ, СЃ СѓРґР°Р»РµРЅРЅС‹Рј html Рё php РєРѕРґРѕРј
+* @param string $in_Val - РёСЃС…РѕРґРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ
+* @param int $trim_Val - РµСЃР»Рё Р±РѕР»СЊС€Рµ 0, С‚Рѕ РѕСЃС‚Р°РІР»СЏРµС‚ С‚РѕР»СЊРєРѕ СѓРєР°Р·Р°РЅРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃРёРјРІРѕР»РѕРІ
+* @param bool $u_Case - РµСЃР»Рё true, С‚Рѕ РІРѕР·РІСЂР°С‰Р°РµС‚ Р·Р°РіР»Р°РІРЅС‹Рµ Р±СѓРєРІС‹
+* @param bool $trim_symbols - РµСЃР»Рё true, С‚Рѕ РІРѕР·РІСЂР°С‰Р°РµС‚ С‚РѕР»СЊРєРѕ С†РёС„СЂС‹ РґРѕ РїРµСЂРІРѕР№ Р±СѓРєРІС‹
 * @return string
 */
 function GetFormValue($in_Val, $trim_Val = 0, $u_Case = false, $trim_symbols=false) {
@@ -1478,4 +1465,146 @@ function GetFormValue($in_Val, $trim_Val = 0, $u_Case = false, $trim_symbols=fal
     }
     return $ret;
 }
+/*....................РљРѕР»РёС‡РµСЃС‚РІРѕ СЋР·РµСЂРѕРІ on-line......................*/
+function OnlineUsers(){
+    $data = "./files/online.dat";
+    $time = time();
+    $past_time = time()-600;
+    $online_array = array();
+    $readdata = fopen($data,"r") or die("РќРµ РјРѕРіСѓ РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р» $data");
+    $data_array = file($data);
+    fclose($readdata);
+
+    if (getenv('HTTP_X_FORWARDED_FOR'))
+        $user = getenv('HTTP_X_FORWARDED_FOR');
+    else
+        $user = getenv('REMOTE_ADDR');
+
+    $d = count($data_array);
+    for($i=0;$i<$d;$i++)
+    {
+        list($live_user,$last_time)=explode("::","$data_array[$i]");
+        if($live_user!=""&&$last_time!=""):
+            if($last_time<$past_time):
+                $live_user="";
+                $last_time="";
+            endif;
+            if($live_user!=""&&$last_time!="")
+            {
+                if($user==$live_user)
+                {
+                    $online_array[]="$user::$time\r\n";
+                }
+                else
+                    $online_array[]="$live_user::$last_time";
+            }
+        endif;
+    }
+
+    if(isset($online_array)):
+        foreach($online_array as $i=>$str)
+        {
+            if($str=="$user::$time\r\n")
+            {
+                $ok=$i;
+                break;
+            }
+        }
+        foreach($online_array as $j=>$str)
+        {
+            if($ok==$j) { $online_array[$ok]="$user::$time\r\n"; break;}
+        }
+    endif;
+
+    $writedata = fopen($data,"w") or die("РќРµ РјРѕРіСѓ РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р» $data");
+    flock($writedata,2);
+    if(sizeof($online_array) == 0){
+        $online_array[]="$user::$time\r\n";
+    }
+    else{
+        //print_r(sizeof($online_array));
+    }
+    foreach($online_array as $str)
+        fputs($writedata,"$str");
+    flock($writedata,3);
+    fclose($writedata);
+
+    $readdata=fopen($data,"r") or die("РќРµ РјРѕРіСѓ РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р» $data");
+    $data_array=file($data);
+    fclose($readdata);
+    $online=count($data_array);
+
+}
+//Р°РІС‚РѕР»РѕРіРёРЅ
+function autoLogin(){
+    $mysqli = M_Core_DB::getInstance();//echo '<pre>';print_r($_COOKIE);echo '</pre>';
+    $login    = $_COOKIE['name'];
+    $password = $_COOKIE['password'];
+    $login    = $login.SALT_LOG;
+    $password = $password.SALT_PAS;
+    // Р’С‹РїРѕР»РЅСЏРµРј Р·Р°РїСЂРѕСЃ РЅР° РїРѕР»СѓС‡РµРЅРёРµ РґР°РЅРЅС‹С… РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РёР· Р‘Р”
+    $query = "SELECT *, UNIX_TIMESTAMP(last_visit) as unix_last_visit
+            FROM ".TABLE_ADMIN_USERS."
+            WHERE login='".md5($login )."'
+			AND password='".md5( $password )."'
+			LIMIT 1";
+    $mysqli->_execute($query);
+    // Р•СЃР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ СЃ С‚Р°РєРёРј Р»РѕРіРёРЅРѕРј Рё РїР°СЂРѕР»РµРј РЅРµ РЅР°Р№РґРµРЅ -
+    // Р·РЅР°С‡РёС‚ РґР°РЅРЅС‹Рµ РЅРµРІРµСЂРЅС‹Рµ Рё РЅР°РґРѕ РёС… СѓРґР°Р»РёС‚СЊ
+    if ( $mysqli->num_rows() == 0 ) {
+        $tmppos = strrpos( $_SERVER['SERVER_NAME'], '/' ) + 1;
+        $path = substr( $_SERVER['SERVER_NAME'], 0, $tmppos );
+        setcookie( 'autologin', '', time() - 1, $path );
+        setcookie( 'name', '', time() - 1, $path );
+        setcookie( 'password', '', time() - 1, $path );
+        setcookie( 'group', '', time() - 1, $path );
+        return false;
+    }
+    $user = $mysqli->fetch();
+    $_SESSION['MM_Username'] = $user;//echo '<pre>';print_r( $_SESSION['MM_Username']);echo '</pre>';
+    $query = "SELECT * FROM ".TABLE_ADMIN_USERS."
+	        WHERE id=".$_SESSION['MM_Username']['id'] ;
+    $mysqli->_execute($query);
+    $res1 = $mysqli->fetch();
+
+    $_SESSION['last_visit'] = $res1;
+
+    $query = "UPDATE ".TABLE_ADMIN_USERS."
+	        SET last_visit=NOW()
+			WHERE id=".$_SESSION['MM_Username']['id'];
+    $mysqli->query($query);
+    $_SESSION['once'] = $res1;
+    return true;
+}
+//.................РїСЂРѕРІРµСЂРєР° СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёСЏ С„Р°Р№Р»Р°..................//
+function FindFileStuct($file_name, $path){
+
+    $str_dir_path = $_SERVER["DOCUMENT_ROOT"].$path;
+    $str_dir = opendir($str_dir_path);
+    $i = 0;
+    $str_files = null;
+    while (($str_file = readdir($str_dir)) !==false)
+    {
+        if (($str_file != ".") && ($str_file != ".."))
+        {
+            $str_files[$i] = basename($str_file);
+            $i++;
+        }
+    }
+    closedir($str_dir);
+    $str_files_count = count($str_files);
+    if ($str_files_count)
+    {
+        sort($str_files);
+        for ($i = 0; $i < $str_files_count; $i++)
+        {
+            if($str_files[$i] == $file_name)
+            {
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
 

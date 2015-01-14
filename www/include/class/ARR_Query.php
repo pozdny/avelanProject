@@ -6,7 +6,11 @@ class ARR_Query {
     public $POS3;
     public $POS4;
     public $DATA = array(
-        "AdminMenu" => array()
+        "Catalog" => array(),
+        "AdminMenu" => array(),
+        "TopMenu" => array(),
+        "Services" => array(),
+        "Raboty" => array()
     );
     public $PAGE_NUM;
     public $PAGE_NUM_BACK;
@@ -17,9 +21,10 @@ class ARR_Query {
         "last_date" => "",
         "group" => ""
     );
+    public $INFO_SITE = array();
     public $WRONGDATA = false;
     public $Scripts = array(
-		'girld' => 'off',
+		'gerld' => 'off',
 		'effect' => 'off'
 	);
 
@@ -33,40 +38,19 @@ class ARR_Query {
         $array_url = array();
 
         $array_url = $resultArray;
-        if(sizeof($array_url) > 4){
-           $this->WRONGDATA = true;
-           return;
-        }
+
 		if(isset($array_url[0]) && $array_url[0] !='')
 		{
 			$this->ACTION = $array_url[0];
 
 		}
-        if (preg_match("/admin-panel/i", $this->ACTION)) {
-            $resultArray = preg_split("/(\?)/", $this->ACTION, -1, PREG_SPLIT_NO_EMPTY);
-            $array_url = array();
-            $array_url = $resultArray;//echo '<pre>';print_r($resultArray);echo '</pre>';
-
-            $this->ACTION = $array_url[0];
-            if(isset($array_url[1]) && $array_url[1] != ''){
-                $this->save_code = $array_url[1];
+        if($this->ACTION !='' && $this->ACTION != 'admin'){
+            if(sizeof($array_url) > 4){
+                $this->WRONGDATA = true;
+                return;
             }
         }
-        if($this->ACTION !='' && $this->ACTION == 'admin'){  // .............................админ панель
-            if(isset($array_url[1]) && $array_url[1] != ''){
-                $this->ACTION = $array_url[1];
-            }
-            if(isset($array_url[2]) && $array_url[2] != ''){
-                $this->POS1 = $array_url[2];
-            }
-            if(isset($array_url[3]) && $array_url[3] != ''){
-                $this->POS2 = $array_url[3];
-            }
-            if(isset($array_url[4]) && $array_url[4] != ''){
-                $this->POS3 = $array_url[4];
-            }
 
-        }
         if(isset($array_url[1]) && $array_url[1] !='')
 		{
 			$this->POS1 = $array_url[1];
@@ -99,6 +83,57 @@ class ARR_Query {
 		{
 			$this->PAGE_NUM_BACK = $_SESSION["pageNum_back"];
 		}
+        //добавляем состав услуг в DATA
+        $services = new Services();
+        $this->DATA["Services"] = $services->Content;
+        if (preg_match("/admin-panel/i", $this->ACTION)) {
+            $resultArray = preg_split("/(\?)/", $this->ACTION, -1, PREG_SPLIT_NO_EMPTY);
+            $array_url = array();
+            $array_url = $resultArray;//echo '<pre>';print_r($resultArray);echo '</pre>';
+
+            $this->ACTION = $array_url[0];
+            if(isset($array_url[1]) && $array_url[1] != ''){
+                $this->save_code = $array_url[1];
+            }
+        }
+        if($this->ACTION !='' && $this->ACTION == 'admin'){  // .............................админ панель
+            if(isset($array_url[1]) && $array_url[1] != ''){
+                $this->ACTION = $array_url[1];
+                $this->POS1 = '';
+                if(!isset($_SESSION['MM_Username'])){
+                    $this->WRONGDATA = true;
+                    return;
+                }
+            }
+            if(isset($array_url[2]) && $array_url[2] != ''){
+                $this->POS1 = $array_url[2];
+                $this->POS2 = '';
+            }
+            if(isset($array_url[3]) && $array_url[3] != ''){
+                $this->POS2 = $array_url[3];
+                $this->POS3 = '';
+            }
+            if(isset($array_url[4]) && $array_url[4] != ''){
+                $this->POS3 = $array_url[4];
+                $this->POS4 = '';
+            }
+            if(isset($array_url[5]) && $array_url[5] != ''){
+                $this->POS4 = $array_url[5];
+                $this->POS5 = '';
+            }
+            $catalog = new Catalog();
+            $this->DATA["Catalog"] = $catalog->Content;
+            //echo '<pre>';print_r($this->DATA["Catalog"]);echo '</pre>';
+            //добавляем состав верхнего меню в DATA
+            $topmenu = new Menu('topmenu');
+            $this->DATA["TopMenu"] = $topmenu->Content;
+            //echo '<pre>';print_r($this->DATA["TopMenu"]);echo '</pre>';
+
+            //добавляем состав работ в DATA
+            $raboty = new Raboty();
+            $this->DATA["Raboty"] = $raboty->Content;
+            //echo '<pre>';print_r($this->DATA["Raboty"]);echo '</pre>';
+        }
         //autorization
         if(isset($_SESSION['MM_Username']) && $_SESSION["MM_Username"]!=''){
             $this->UsernameEnter["enter"] = 'Y';
@@ -111,18 +146,12 @@ class ARR_Query {
             $adminmenu = new Menu('leftmenu', $this->UsernameEnter["group"]);
             $this->DATA["AdminMenu"] = $adminmenu->Content;
         }
-
-        //girld
-		/*$query = "SELECT option_value FROM ".OPTIONS." WHERE option_name LIKE 'gerld'";
-		$k = mysql_query($query) or die(mysql_error());
-		$row_k = mysql_fetch_assoc($k);
-		$girld = $row_k['option_value'];
-		$query = "SELECT option_value FROM ".OPTIONS." WHERE option_name LIKE 'effect'";
-		$k = mysql_query($query) or die(mysql_error());
-		$row_k = mysql_fetch_assoc($k);
-		$effect = $row_k['option_value'];
-		$this->Scripts["girld"] =  $girld;
-		$this->Scripts["effect"] = $effect;*/
+        //добавляем состав TABLE_INFO в arResult
+        $this->INFO_SITE = InfoSite::getInfo();
+        //значения для гирлянды и эффектов
+		$effect = new Effects();
+        $this->Scripts["gerld"] = $effect->gerld;
+        $this->Scripts["effect"] = $effect->effect;
 	}
 	function query( ) {
 		$this->init();

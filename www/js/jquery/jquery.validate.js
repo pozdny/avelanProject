@@ -684,7 +684,7 @@
             defaultShowErrors: function() {
                 var i, elements, error;
                 for ( i = 0; this.errorList[i]; i++ ) {
-                    error = this.errorList[i];console.log();
+                    error = this.errorList[i];
                     if ( this.settings.highlight ) {
                         this.settings.highlight.call( this, error.element, this.settings.errorClass, this.settings.validClass );
                     }

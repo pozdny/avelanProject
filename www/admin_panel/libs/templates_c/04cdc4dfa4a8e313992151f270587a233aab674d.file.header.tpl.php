@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2014-10-12 18:40:03
+<?php /* Smarty version Smarty-3.1.18, created on 2014-11-11 14:22:32
          compiled from "admin_panel\libs\templates\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:654754379176ca6773-13503145%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '04cdc4dfa4a8e313992151f270587a233aab674d' => 
     array (
       0 => 'admin_panel\\libs\\templates\\header.tpl',
-      1 => 1413132001,
+      1 => 1415712148,
       2 => 'file',
     ),
   ),
@@ -28,11 +28,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <?php if ($_valid && !is_callable('content_54379176cf31f5_36216546')) {function content_54379176cf31f5_36216546($_smarty_tpl) {?><!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=charset=utf-8"/>
+    <meta charset=utf-8 >
     <meta name="robots" content="noindex, nofollow" />
     <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/admin_style.css" rel="stylesheet">
+    <script src="/js/jquery/jquery-2.0.3.js"></script>
     <title><?php echo $_smarty_tpl->tpl_vars['titlepage']->value;?>
 </title>
 
@@ -45,7 +46,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <div class="contayner">
     <!--main-->
     <div class="main">
-        <div class="head">
+        <header class="head">
+            <a id="top"></a>
             <div class="row">
                 <div class="col-xs-12">
                     <?php echo $_smarty_tpl->tpl_vars['hello']->value;?>
@@ -62,4 +64,5 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                     </div>
                 </div>
             </div>
-        </div><?php }} ?>
+
+        </header><?php }} ?>

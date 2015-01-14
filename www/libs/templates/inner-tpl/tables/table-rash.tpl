@@ -1,4 +1,4 @@
 <table class="table table-bordered table-condensed tab_h">
-<tr><th>Наименование товара</th><th>Ед.изм.</th><th>Цена (диллер. руб.)</th></tr>
+<tr><th>РќР°РёРјРµРЅРѕРІР°РЅРёРµ С‚РѕРІР°СЂР°</th><th>Р•Рґ.РёР·Рј.</th><th>Р¦РµРЅР° (РґРёР»Р»РµСЂ. СЂСѓР±.)</th></tr>
 {$content_price}
 </table>

@@ -56,7 +56,8 @@ $(document).ready(function() {
         var footerOffsetTop = footerOffset.top;
         var blockHeight = block.height();
         var sum = blockOffsetTop + blockHeight;
-        if(sum < (footerOffsetTop - footerHeight)){
+        var parent = block.closest(".container");
+        if((Math.round(sum) < (footerOffsetTop - footerHeight)) && !parent.hasClass("two-columns")){
             var razn = footerOffsetTop - sum - footerHeight;
             block.height(blockHeight + razn);
         }
@@ -117,7 +118,7 @@ $(document).ready(function() {
     });
     //PLACEHOLDER
     var inputFild = $("#inputFild");
-    var txt = 'Мы поможем найти...';
+    var txt = 'РњС‹ РїРѕРјРѕР¶РµРј РЅР°Р№С‚Рё...';
     inputFild.addClass('placeholded').val(txt);
     inputFild.focus(function(){
         $(this).val('');
@@ -142,8 +143,8 @@ $(document).ready(function() {
         formNameId: '#form-pushki',
         submitButtonDisabled: false,
         messages: {
-            required: "Не заполнено обязательное поле!",
-            iconStatusErrTitle: "Поле не может быть пустым!"
+            required: "РќРµ Р·Р°РїРѕР»РЅРµРЅРѕ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕРµ РїРѕР»Рµ!",
+            iconStatusErrTitle: "РџРѕР»Рµ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РїСѓСЃС‚С‹Рј!"
         }
     });
     $("#form-cond").validatorRM({
@@ -155,8 +156,8 @@ $(document).ready(function() {
         formNameId: '#form-cond',
         submitButtonDisabled: false,
         messages: {
-            required: "Не заполнено обязательное поле!",
-            iconStatusErrTitle: "Поле не может быть пустым!"
+            required: "РќРµ Р·Р°РїРѕР»РЅРµРЅРѕ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕРµ РїРѕР»Рµ!",
+            iconStatusErrTitle: "РџРѕР»Рµ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РїСѓСЃС‚С‹Рј!"
         }
     });
     //BUTTONS CALCULATOR
@@ -199,8 +200,8 @@ $(document).ready(function() {
 
     //BACKCALL ..............................................
     var wrap = $('body');
-    var title = "Заявка на звонок";
-    var text  = '<br>Мы всегда рады предоставить развернутую консультацию. Если Вас интересует что-либо из нашей сферы деятельности – стоимость наших услуг, ассортимент и т.д. – заполните форму, расположенную ниже. Менеджеры свяжутся с Вами вскоре после получения запроса.';
+    var title = "Р—Р°СЏРІРєР° РЅР° Р·РІРѕРЅРѕРє";
+    var text  = '<br>РњС‹ РІСЃРµРіРґР° СЂР°РґС‹ РїСЂРµРґРѕСЃС‚Р°РІРёС‚СЊ СЂР°Р·РІРµСЂРЅСѓС‚СѓСЋ РєРѕРЅСЃСѓР»СЊС‚Р°С†РёСЋ. Р•СЃР»Рё Р’Р°СЃ РёРЅС‚РµСЂРµСЃСѓРµС‚ С‡С‚Рѕ-Р»РёР±Рѕ РёР· РЅР°С€РµР№ СЃС„РµСЂС‹ РґРµСЏС‚РµР»СЊРЅРѕСЃС‚Рё вЂ“ СЃС‚РѕРёРјРѕСЃС‚СЊ РЅР°С€РёС… СѓСЃР»СѓРі, Р°СЃСЃРѕСЂС‚РёРјРµРЅС‚ Рё С‚.Рґ. вЂ“ Р·Р°РїРѕР»РЅРёС‚Рµ С„РѕСЂРјСѓ, СЂР°СЃРїРѕР»РѕР¶РµРЅРЅСѓСЋ РЅРёР¶Рµ. РњРµРЅРµРґР¶РµСЂС‹ СЃРІСЏР¶СѓС‚СЃСЏ СЃ Р’Р°РјРё РІСЃРєРѕСЂРµ РїРѕСЃР»Рµ РїРѕР»СѓС‡РµРЅРёСЏ Р·Р°РїСЂРѕСЃР°.';
     $('<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalBack" aria-hidden="true" >')
         .append($('<div>').attr("class", "modal-dialog")
             .append($('<div>').attr("class", "modal-content")
@@ -218,9 +219,9 @@ $(document).ready(function() {
                             .append($("<div>").attr("class", "form-group col-xs-6" )
 
                                 .append($("<label>").attr("for", "nameOrder")
-                                    .append("Ваше имя")
+                                    .append("Р’Р°С€Рµ РёРјСЏ")
                                 )
-                                .append($("<input name='nameOrder'>").attr({class:"form-control ignore",id:"nameOrder", maxlength:"70", type:"text", placeholder:"Имя"}))
+                                .append($("<input name='nameOrder'>").attr({class:"form-control ignore",id:"nameOrder", maxlength:"70", type:"text", placeholder:"РРјСЏ"}))
                             )
 
                         )
@@ -228,27 +229,27 @@ $(document).ready(function() {
                             .append($("<div>").attr("class", "form-group col-xs-6" )
 
                                 .append($("<label>").attr("for", "phoneOrder")
-                                    .append("Контактный телефон<span class='redStar'>*</span>")
+                                    .append("РљРѕРЅС‚Р°РєС‚РЅС‹Р№ С‚РµР»РµС„РѕРЅ<span class='redStar'>*</span>")
                                 )
-                                .append($("<input name='phoneOrder'>").attr({class:"form-control",id:"phoneOrder", maxlength:"70", type:"text", placeholder:"Телефон"}))
+                                .append($("<input name='phoneOrder'>").attr({class:"form-control",id:"phoneOrder", maxlength:"70", type:"text", placeholder:"РўРµР»РµС„РѕРЅ"}))
                             )
 
                         )
                         .append($("<div>").attr("class", "row")
                             .append($("<div>").attr("class", "form-group col-xs-12" )
                                 .append($("<label>").attr("for", "caracterOrder")
-                                    .append("Ваш вопрос")
+                                    .append("Р’Р°С€ РІРѕРїСЂРѕСЃ")
                                 )
-                                .append($("<textarea rows='2' name='caracterOrder'>").attr({id: "caracterOrder", placeholder:"Вопрос", class:"form-control ignore", maxlength:"500"}).css("width", "100%"))
+                                .append($("<textarea rows='2' name='caracterOrder'>").attr({id: "caracterOrder", placeholder:"Р’РѕРїСЂРѕСЃ", class:"form-control ignore", maxlength:"500"}).css("width", "100%"))
                             )
                         )
                         .append($("<div>").attr({id:"resultOrderBack"}))
                         .append($('<div>').attr({class:"row"})
                             .append($('<div>').attr({class:"col-xs-12"})
-                                .append($("<button>").attr({id:"blankButtonBack",disabled:"disabled", class:"btn btn-primary", type:"submit", "data-loading-text":"Подождите..."})
-                                    .append("Отправить"))
+                                .append($("<button>").attr({id:"blankButtonBack",disabled:"disabled", class:"btn btn-primary", type:"submit", "data-loading-text":"РџРѕРґРѕР¶РґРёС‚Рµ..."})
+                                    .append("РћС‚РїСЂР°РІРёС‚СЊ"))
                                 .append($('<button data-dismiss="modal">').attr({class:"btn btn-default"})
-                                    .append("Закрыть"))
+                                    .append("Р—Р°РєСЂС‹С‚СЊ"))
                             )
                         )
 
@@ -259,16 +260,11 @@ $(document).ready(function() {
         )
         .appendTo(wrap);
     var form = $('#blankFormBack'),
-        H = $("html"),
         button = $('#blankButtonBack'),
         result = $('#resultOrderBack'),
         order_backcall = $('#order_backcall'),
-        calcImg = $('#calcImg'),
-        topIndent = calcImg.offset().top + calcImg.height() + 30;
-    if(H.height() < 600){
-        order_backcall.offset({top:topIndent, left:order_backcall.offset().left});
-    };
-    //order_backcall.offset({top:topIndent});
+        calcImg = $('#calcImg');
+
     order_backcall.click(function(){
         if(form.hasClass('send')){
             var resultOrderInner = $('#resultOrderInner');
@@ -288,10 +284,10 @@ $(document).ready(function() {
             thisForm.get(0).reset();
             var mess = '';
             if(data.rez == '1'){
-                mess = 'Ваше сообщение отправлено!';
+                mess = 'Р’Р°С€Рµ СЃРѕРѕР±С‰РµРЅРёРµ РѕС‚РїСЂР°РІР»РµРЅРѕ!';
             }
             else{
-                mess = 'При отправке сообщения возникли ошибки, поробуйте еще раз!';
+                mess = 'РџСЂРё РѕС‚РїСЂР°РІРєРµ СЃРѕРѕР±С‰РµРЅРёСЏ РІРѕР·РЅРёРєР»Рё РѕС€РёР±РєРё, РїРѕСЂРѕР±СѓР№С‚Рµ РµС‰Рµ СЂР°Р·!';
             }
             inputs.each(function(){
                 $(this).val('').removeClass('valid').siblings('span').remove();
@@ -311,8 +307,8 @@ $(document).ready(function() {
         },
         messages: {
             phoneOrder: {
-                required: "Обязательное поле",
-                digits: "Пожалуйста, введите только цифры"
+                required: "РћР±СЏР·Р°С‚РµР»СЊРЅРѕРµ РїРѕР»Рµ",
+                digits: "РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІРІРµРґРёС‚Рµ С‚РѕР»СЊРєРѕ С†РёС„СЂС‹"
             }
 
         },
@@ -349,20 +345,90 @@ $(document).ready(function() {
                     value:arr
                 }
             }).always(function () {
-                btn.text('Отправить').removeClass('disabled').attr({disabled:false});
+                btn.text('РћС‚РїСЂР°РІРёС‚СЊ').removeClass('disabled').attr({disabled:false});
 
             });
         }
     });
 
-    //MODAL
-    //модально окно login
+    //MODAL LOGIN
+    //........................................................
     $('#loginModal').modal({
         keyboard: false,
         backdrop: true,
         show: true
     });
+    var close = $("#loginModal .close, #loginModal .close-foot, #loginModal");
+    close.on('click', function(){
 
+        location.href = loc;
+    })
+    $("#loginForm").on("click",function(e){
+        e.stopPropagation();
+    })
+    var login = $("#login-form");
+    login.on('click', function(e){
+        loginForm();
+    })
+    function loginForm(){
+        var arr = $("#loginForm").serializeArray();
+        $.ajaxSetup({
+            url:"/admin_panel/ajaxFunc.php",
+            type: "POST",
+            dataType:"json",
+            cache:false,
+            success: function(data){
+                if(data)
+                {
+                    var password = $("#password");
+                    var error_row = $("#error_row");
+                    var text = '';
+                    var text2 = '';
+                    var rez = data.rez;
+                    if(error_row) error_row.remove();
+
+                    if(rez == 'ok'){
+                        location.href = 'admin';
+                    }
+                    else{console.log(data.rez);
+                        password.after('<div class="col-lg-6 col-lg-offset-3" id="error_row"><div class=" style3" id="error_mess"></div></div>');
+                        var error_mess = $("#error_mess");
+                        error_mess.empty();
+                        if(rez == 'no'){ console.log('no');
+                            text = "РЅРµРїСЂР°РІРёР»СЊРЅС‹Р№ Р»РѕРіРёРЅ РёР»Рё РїР°СЂРѕР»СЊ";
+                            error_mess.append(text);
+                        }
+                        else{
+                            if(rez == 'empty_login'){
+                                text = "РЅРµ Р·Р°РїРѕР»РЅРµРЅРѕ РїРѕР»Рµ \"Р»РѕРіРёРЅ\"";
+                                error_mess.append(text);
+                            }
+                            else if(rez == 'empty_password'){
+                                text = "РЅРµ Р·Р°РїРѕР»РЅРµРЅРѕ РїРѕР»Рµ \"РїР°СЂРѕР»СЊ\"";
+                                error_mess.append(text);
+                            }
+                            else{
+                                text = "РЅРµ Р·Р°РїРѕР»РЅРµРЅРѕ РїРѕР»Рµ \"Р»РѕРіРёРЅ\"" + "<br>";
+                                text2 = "РЅРµ Р·Р°РїРѕР»РЅРµРЅРѕ РїРѕР»Рµ \"РїР°СЂРѕР»СЊ\"";
+                                error_mess.append(text);
+                                error_mess.append(text2);
+                            }
+                        }
+                    }
+                }
+            },
+            error: function(obj, err){
+
+            }
+        });
+        $.ajax({
+            data:{
+                num:2,
+                arr:arr
+            }
+        });
+    }
+    //.....................................................................................
 });
 $(document).on('click.bs.tab.data-api', '[data-toggle="tab"]', function (e) {
     e.preventDefault();

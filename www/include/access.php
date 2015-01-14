@@ -1,6 +1,5 @@
 <?php
-function access()
-{
+function access(){
     $MM_authorizedUsers = "a,m";
     $MM_restrictGoTo = '/admin-panel?'.SAVE_CODE;
     if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_Username']['rights']))))
@@ -9,8 +8,7 @@ function access()
         exit;
     }
 }
-function access_rights($ar)
-{
+function access_rights($ar){
     $MM_authorizedUsers = $ar;
     $MM_restrictGoTo = '/admin-panel?'.SAVE_CODE;
     if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers, $_SESSION['MM_Username']["name"], $_SESSION['MM_Username']['rights']))))

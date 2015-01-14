@@ -1,4 +1,4 @@
-<div class="row main-navbar-block">
+<nav class="row main-navbar-block">
     <div class="col-xs-offset-2 col-xs-10 col-sm-offset-1 col-sm-11 col-md-offset-2 col-md-10 col-lg-offset-4 col-lg-8 adapt-nav">
         <div class="navbar-block">
             <div class="navbar navbar-default" role="navigation">
@@ -25,4 +25,4 @@
         </div>
 
     </div>
-</div>
+</nav>

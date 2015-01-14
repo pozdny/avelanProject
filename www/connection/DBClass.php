@@ -1,7 +1,7 @@
 <?php
 //связь с БД
 define ( 'HOSTNAME', 'localhost');
-define ( 'DATABASE', 'avelan');
+define ( 'DATABASE', 'u4617988_avelan');
 define ( 'USERNAME', 'root');
 define ( 'PASSWORD', '');
 define ( 'TYPE',     'mysqli'); 
@@ -123,7 +123,6 @@ class M_Core_DB{
         if ($this->type == 'mysqli')
             return $this->query_mysqli($query, $params);
     }
-
     /**
      * Send query - mysqli
      *
@@ -220,7 +219,7 @@ class M_Core_DB{
         $values = array_fill(0, count($this->keys), null);
         $refs = array();
         foreach ($values as $i => &$f) $refs[$i] = &$f;
-
+//echo '<pre>';print_r($this->stmt);echo '</pre>';
         call_user_func_array(array(&$this->stmt, 'bind_result'),$refs);
         $retval = $this->stmt->fetch();
         if (!$retval){

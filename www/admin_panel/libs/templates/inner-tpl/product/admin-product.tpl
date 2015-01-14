@@ -1,4 +1,2 @@
-<tr class="{$submenu_td}">
-    {$td}
-</tr>
+{$td}
 {$product}

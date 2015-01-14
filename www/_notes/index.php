@@ -1,26 +1,30 @@
 <?php
-// подключаем основные настройки
+if (!isset($_SESSION)){
+    session_start();
+}
+// configs
 require_once 'include/config.php';
-// подключаем базу данных
-// Подключаем БД
+// BD
 require_once('connection/DBClass.php');
-//Создадим объект класса Smarty
+// Smarty
 require_once 'libs/Smarty.class.php';
 $smarty = new Smarty();
 require_once 'libs/setup.php';
 require_once 'include/include.php';
 $arResult = getArResult(); //echo '<pre>'; print_r($arResult); echo '</pre>';
 if ( $arResult->ACTION == '' ) $arResult->ACTION = 'MainPage';
-//проверка на правильность адреса
-if ( !in_array( $arResult->ACTION, $actions ) || $arResult->WRONGDATA){
+// error404
+if ( !in_array( $arResult->ACTION, $actions ) || ($arResult->ACTION == 'admin-panel' && $arResult->save_code !=SAVE_CODE) || $arResult->WRONGDATA){
     error404(SAPI_NAME, REQUEST_URL);
     return;
 }
-
-//Создание главного шаблона
+if(isset($arResult->UsernameEnter["enter"]) &&  $arResult->UsernameEnter["enter"] != "Y" && !isset($_SESSION['once']) && isset( $_COOKIE['autologin'] ) ) autoLogin();
+$Services = $arResult->DATA["Services"];
+// main template
 $smarty->assign('header', head());
 $smarty->assign('arResult', $arResult);
 $smarty->assign('navbar', navigator());
+$smarty->assign('edit', getEdit());
 $smarty->assign('title_main', title_main());
 $smarty->assign('bread_crumbs', bread_crumbs($arrayBreadCrumbs));
 $smarty->assign('footer', footer());
@@ -30,7 +34,6 @@ $smarty->assign('backcall', $smarty->fetch('inner-tpl/forms/backcall/backcall.tp
 switch ($arResult->ACTION)
 {
     case 'MainPage':
-        //Передаем переменную в шаблонизатор Smarty
         $smarty->assign('content', MainPage());
         break;
     case 'about':
@@ -56,12 +59,17 @@ switch ($arResult->ACTION)
     case 'raschet-moshchnosti-oborudovaniya':
         $smarty->assign('content', raschet_moshchnosti_oborudovaniya());
         break;
+    case 'admin-panel':
+        $smarty->assign('login_form', getAdminPanel());
+        $smarty->assign('content', '');
+        $smarty->assign('bread_crumbs', '');
+        break;
     default:
         $arResult->ACTION = "MainPage";
         $smarty->assign('action', $arResult->ACTION);
         $smarty->assign('content', MainPage());
 }
-//Выводим шаблон на экран
+//display main temlate
 $smarty->display('main.tpl');
 
 function MainPage()
@@ -69,15 +77,15 @@ function MainPage()
     global $smarty;
     $mysqli = M_Core_DB::getInstance();
     $id = 1;
-    $query = sprintf("SELECT content FROM ".NAVIGATOR." WHERE id=%s", $id);
-    //$k = mysql_query($query) or die(mysql_error());
-    //$row_k = mysql_fetch_assoc($k);
+    $query = sprintf("SELECT zagolovok,content FROM ".NAVIGATOR." WHERE id=%s", $id);
     $mysqli->_execute($query);
     $row = $mysqli->fetch();
-    $content = $row["content"];
+    $content = print_page($row["content"]);
+    $main_title = $row["zagolovok"];
     //.......TAB-VIEW
     $query = 'SELECT '.SERVICES.'.title, '.SERVICES.'.eng FROM '.SERVICES.'
-	     	  ORDER BY '.SERVICES.'.id';
+              WHERE '.SERVICES.'.eng NOT LIKE "default%"
+	     	  ORDER BY '.SERVICES.'.id LIMIT 0,4';
     $mysqli->_execute($query);
     $li_tab = '';
     $tab_pane = '';
@@ -95,7 +103,6 @@ function MainPage()
             $tab_pane.= $smarty->fetch('inner-tpl/tab-view/tab-pane.tpl');
             $active = '';
         }
-
     }
     $smarty->assign('li_tab', $li_tab);
     $tab_view = $smarty->fetch('inner-tpl/tab-view/tab-view.tpl');
@@ -143,6 +150,8 @@ function MainPage()
     $smarty->assign('main_tab_view', $main_tab_view);
     $smarty->assign('content', $content);
     $smarty->assign('main_carousel', $main_carousel);
+    $smarty->assign('title', $main_title);
+    $smarty->assign('edit_link', getEdit());
     $html = $smarty->fetch('inner-tpl/main-page.tpl');
 
     return $html;
@@ -240,14 +249,13 @@ function services(){
     }
     else
     {
-        //изображение
         $query = sprintf("SELECT img_service FROM ".TABLE_INFO);
         $mysqli->_execute($query);
         $row = $mysqli->fetch();
         if($row > 0 && $row['img_service'] !='')
         {
             $img_service = $row['img_service'];
-            $img = '<div id="img_services"><img src="/img/services/'.$img_service.'" alt="Услуги"></div>';
+            $img = '<div id="img_services"><img src="/img/services/'.$img_service.'" alt="РЈСЃР»СѓРіРё"></div>';
         }
         $content_page = catalog_services();
         $content_page.= $img.print_page($content);
@@ -276,5 +284,10 @@ function nashi_raboty(){
     {
         $html.= nashi_raboty_pos1();
     }
+    return $html;
+}
+function getAdminPanel(){
+    global $smarty;
+    $html = $smarty->fetch('inner-tpl/forms/login/login.tpl');
     return $html;
 }

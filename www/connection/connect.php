@@ -4,7 +4,7 @@
 # HTTP="true"
 $hostname = "localhost";
 
-$database = "avelan";
+$database = "u4617988_avelan";
 
 $username = "root";
 

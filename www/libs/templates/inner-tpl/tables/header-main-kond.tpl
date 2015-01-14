@@ -1,11 +1,12 @@
 <tr>
-<th rowspan="2">МОДЕЛЬ</th>
-<th colspan="2">МОЩНОСТЬ, кВт</th>
-<th rowspan="2">РАЗМЕР ВНУТР.БЛОКА, мм</th>
-<th rowspan="2">ВЕС, кг вн/внеш</th>
-<th rowspan="2">Розница, руб.</th>
+    <th rowspan="2">РњРћР”Р•Р›Р¬</th>
+    <th colspan="2" width="30%">РњРћР©РќРћРЎРўР¬, РєР’С‚</th>
+    <th rowspan="2">Р РђР—РњР•Р  Р’РќРЈРўР .Р‘Р›РћРљРђ, РјРј</th>
+    <th rowspan="2">Р’Р•РЎ, РєРі РІРЅ/РІРЅРµС€</th>
+    <th rowspan="2">Р РѕР·РЅРёС†Р°, СЂСѓР±.</th>
 </tr>
 <tr>
-<th>холод</th>
-<th>тепло</th>
+    <th style="text-align: center">С…РѕР»РѕРґ</th>
+    <th>С‚РµРїР»Рѕ</th>
 </tr>
+

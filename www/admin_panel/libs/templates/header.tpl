@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=charset=utf-8"/>
+    <meta charset=utf-8 >
     <meta name="robots" content="noindex, nofollow" />
     <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/admin_style.css" rel="stylesheet">
+    <script src="/js/jquery/jquery-2.0.3.js"></script>
     <title>{$titlepage}</title>
 
 </head>
@@ -17,7 +18,8 @@
 <div class="contayner">
     <!--main-->
     <div class="main">
-        <div class="head">
+        <header class="head">
+            <a id="top"></a>
             <div class="row">
                 <div class="col-xs-12">
                     {$hello}
@@ -32,4 +34,5 @@
                     </div>
                 </div>
             </div>
-        </div>
+
+        </header>

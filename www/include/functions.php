@@ -14,6 +14,11 @@ function head()
         $class_true = 'block-false';
         $hello = '';
     }
+    $phone_service  = $arResult->INFO_SITE["phone_service"];
+    $phone = $arResult->INFO_SITE["phone"];
+    $email = $arResult->INFO_SITE["mail"];
+    $work = $arResult->INFO_SITE["work"];
+    $weekend = $arResult->INFO_SITE["weekend"];
 
     $navbar = navigator();
     $titlepage = header_meta("titlepage");
@@ -22,18 +27,28 @@ function head()
     $action_form = '/result_search';
     $smarty->assign('action', $action_form);
     $search_form = $smarty->fetch('search-form.tpl');
+
+    if($arResult->Scripts["gerld"] == 'on'){
+        $gerld = '<div id="gerland" class="gerland_4"><div id="nums_1">2</div></div>';
+    }
+    else $gerld = '';
+    $smarty->assign('gerld', $gerld);
     $smarty->assign('navbar', $navbar);
     $smarty->assign('class_true', $class_true);
     $smarty->assign('titlepage', $titlepage);
     $smarty->assign('description', $description);
     $smarty->assign('keywords', $keywords);
     $smarty->assign('search_form', $search_form);
+    $smarty->assign('phone_service', $phone_service);
+    $smarty->assign('phone', $phone);
+    $smarty->assign('email', $email);
+    $smarty->assign('work', $work);
+    $smarty->assign('weekend', $weekend);
     $smarty->assign('hello', $hello);
     $html = $smarty->fetch('header.tpl');
     return $html;
 }
-function footer()
-{
+function footer(){
     $mysqli = M_Core_DB::getInstance();
     global $arResult;
     global $smarty;
@@ -43,11 +58,13 @@ function footer()
     else{
         $class_true = 'block-false';
     }
+    $name  = $arResult->INFO_SITE["name"];
     $query = "SELECT * FROM ".SCHET;
     $mysqli->_execute($query);
     $i=1;
     $date = date('Y');
     $smarty->assign('date', $date);
+    $smarty->assign('name', $name);
     $smarty->assign('class_true', $class_true);
     while($row = $mysqli->fetch())
     {
@@ -55,6 +72,11 @@ function footer()
         $smarty->assign('schet_'.$i, $schet);
         $i++;
     }
+    if($arResult->Scripts["effect"] == 'on'){
+        $snow_script = '<script src="/js/snowstorm.js"></script>';
+    }
+    else $snow_script = '';
+    $smarty->assign('snow_script', $snow_script);
     $html = $smarty->fetch('footer.tpl');
     return $html;
 }
@@ -313,8 +335,9 @@ function catalog_services()
 {
     $mysqli = M_Core_DB::getInstance();
     global $arResult; //echo '<pre>';print_r($arResult);echo '</pre>';
-    $query = 'SELECT '.SERVICES.'.id, '.SERVICES.'.title, '.SERVICES.'.eng FROM '.SERVICES.'
-	     	  ORDER BY '.SERVICES.'.id';
+    $query = "SELECT ".SERVICES.".id, ".SERVICES.".title, ".SERVICES.".eng FROM ".SERVICES."
+              WHERE ".SERVICES.".eng NOT LIKE 'default%'
+	     	  ORDER BY ".SERVICES.".id";
     $mysqli->_execute($query);
     $html = '';
 
@@ -338,7 +361,7 @@ function catalog_services_pos1()
     $mysqli = M_Core_DB::getInstance();
     global $arResult;
     global $smarty;
-    $html = '';
+    $html = $block_img = '';
     if($arResult->POS1 !='')
     {
         $pos1 = $arResult->POS1;
@@ -394,8 +417,8 @@ function catalog_services_pos1()
     return $html;
 }
 // .............................поиск изображения...........................//
-function FindImg($img, $path, $tab, $id)
-{
+function FindImg($img, $path, $tab, $id){
+    $mysqli = M_Core_DB::getInstance();
     $img_empty = 'empty.jpg';
     $image_dir_path = $_SERVER["DOCUMENT_ROOT"] . PATH_IMG.$path;
     $image_dir = opendir($image_dir_path);
@@ -411,13 +434,11 @@ function FindImg($img, $path, $tab, $id)
     }
     closedir($image_dir);
     $image_files_count = count($image_files);
-    if ($image_files_count)
-    {
+    if ($image_files_count){
         sort($image_files);
         for ($i = 0; $i <$image_files_count; $i++)
         {
-            if($image_files[$i] == $img)
-            {
+            if($image_files[$i] == $img){
                 return $img;
             }
         }
@@ -427,7 +448,7 @@ function FindImg($img, $path, $tab, $id)
     $query = sprintf("UPDATE ".$tab." SET img=%s  WHERE id=%s",
         GetSQLValueString($img_empty, "text"),
         GetSQLValueString($id, "int"));
-    mysql_query($query);
+    $mysqli->query($query);
     return $img_empty;
 }
 //..............................функция ошибок.............................//
@@ -542,7 +563,8 @@ function left_menu(){
     $pos3 = $arResult->POS3;
     if($action == 'services'){
         $query = "SELECT ".SERVICES.".id, ".SERVICES.".title, ".SERVICES.".eng FROM ".SERVICES."
-			  ORDER BY ".SERVICES.".id";
+                  WHERE ".SERVICES.".eng NOT LIKE 'default%'
+			      ORDER BY ".SERVICES.".id";
     }
     elseif($action == 'nashi_raboty'){
         $query = "SELECT * FROM ".RABOTY."
@@ -1537,8 +1559,7 @@ function OnlineUsers(){
 
 }
 //автологин
-function autoLogin()
-{
+function autoLogin(){
     $mysqli = M_Core_DB::getInstance();//echo '<pre>';print_r($_COOKIE);echo '</pre>';
     $login    = $_COOKIE['name'];
     $password = $_COOKIE['password'];
@@ -1577,6 +1598,36 @@ function autoLogin()
     $mysqli->query($query);
     $_SESSION['once'] = $res1;
     return true;
+}
+//.................проверка существования файла..................//
+function FindFileStuct($file_name, $path){
+
+    $str_dir_path = $_SERVER["DOCUMENT_ROOT"].$path;
+    $str_dir = opendir($str_dir_path);
+    $i = 0;
+    $str_files = null;
+    while (($str_file = readdir($str_dir)) !==false)
+    {
+        if (($str_file != ".") && ($str_file != ".."))
+        {
+            $str_files[$i] = basename($str_file);
+            $i++;
+        }
+    }
+    closedir($str_dir);
+    $str_files_count = count($str_files);
+    if ($str_files_count)
+    {
+        sort($str_files);
+        for ($i = 0; $i < $str_files_count; $i++)
+        {
+            if($str_files[$i] == $file_name)
+            {
+                return 1;
+            }
+        }
+    }
+    return 0;
 }
 
 

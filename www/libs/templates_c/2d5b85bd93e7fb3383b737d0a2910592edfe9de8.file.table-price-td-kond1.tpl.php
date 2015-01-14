@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2014-10-01 15:31:50
+<?php /* Smarty version Smarty-3.1.18, created on 2014-10-15 11:00:51
          compiled from "libs\templates\inner-tpl\tables\table-price-td-kond1.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:11696542c02463c43e6-54166477%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '2d5b85bd93e7fb3383b737d0a2910592edfe9de8' => 
     array (
       0 => 'libs\\templates\\inner-tpl\\tables\\table-price-td-kond1.tpl',
-      1 => 1412169900,
+      1 => 1413098657,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.18',
+  'unifunc' => 'content_542c024642c718_73032109',
   'variables' => 
   array (
     'btu_c' => 0,
@@ -26,8 +28,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'price_td' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.18',
-  'unifunc' => 'content_542c024642c718_73032109',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_542c024642c718_73032109')) {function content_542c024642c718_73032109($_smarty_tpl) {?><td class="border_price" ><?php echo $_smarty_tpl->tpl_vars['btu_c']->value;?>
 </td><td class="border_price" ><?php echo $_smarty_tpl->tpl_vars['btu_h']->value;?>

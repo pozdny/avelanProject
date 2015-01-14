@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2014-10-12 09:31:11
+<?php /* Smarty version Smarty-3.1.18, created on 2014-10-16 09:42:18
          compiled from "libs\templates\navbar.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:11492541ffcdf3b9054-92913134%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'aaed68f013dd60acb13ae40884bea2372911f894' => 
     array (
       0 => 'libs\\templates\\navbar.tpl',
-      1 => 1413098657,
+      1 => 1413445335,
       2 => 'file',
     ),
   ),
@@ -23,7 +23,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_541ffcdf3bdb23_74809557')) {function content_541ffcdf3bdb23_74809557($_smarty_tpl) {?><div class="row main-navbar-block">
+<?php if ($_valid && !is_callable('content_541ffcdf3bdb23_74809557')) {function content_541ffcdf3bdb23_74809557($_smarty_tpl) {?><nav class="row main-navbar-block">
     <div class="col-xs-offset-2 col-xs-10 col-sm-offset-1 col-sm-11 col-md-offset-2 col-md-10 col-lg-offset-4 col-lg-8 adapt-nav">
         <div class="navbar-block">
             <div class="navbar navbar-default" role="navigation">
@@ -51,4 +51,4 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         </div>
 
     </div>
-</div><?php }} ?>
+</nav><?php }} ?>

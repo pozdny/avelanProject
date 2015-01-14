@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2014-10-12 12:06:03
+<?php /* Smarty version Smarty-3.1.18, created on 2014-11-05 11:19:49
          compiled from "admin_panel\libs\templates\footer.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:58645437a110965c15-94110497%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '56f482214b34bce46fe93219f59eb4cba05412a0' => 
     array (
       0 => 'admin_panel\\libs\\templates\\footer.tpl',
-      1 => 1413108362,
+      1 => 1415112347,
       2 => 'file',
     ),
   ),
@@ -27,7 +27,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5437a1109e8212_00310630')) {function content_5437a1109e8212_00310630($_smarty_tpl) {?><div id="footer">
+<?php if ($_valid && !is_callable('content_5437a1109e8212_00310630')) {function content_5437a1109e8212_00310630($_smarty_tpl) {?><footer id="footer">
     <div id="main_foot">
         <div id="foot_block">
             <div class="row">
@@ -40,19 +40,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 <div class="col-xs-6 right-foot">
                     <div id="schets" class="<?php echo $_smarty_tpl->tpl_vars['class_true']->value;?>
 ">
-                        <div id="schet_1" class="schet"><?php echo $_smarty_tpl->tpl_vars['schet_1']->value;?>
+                        <div id="schet_1" class="schets"><?php echo $_smarty_tpl->tpl_vars['schet_1']->value;?>
 </div>
-                        <div id="schet_2" class="schet"><?php echo $_smarty_tpl->tpl_vars['schet_2']->value;?>
+                        <div id="schet_2" class="schets"><?php echo $_smarty_tpl->tpl_vars['schet_2']->value;?>
 </div>
-                        <div id="schet_3" class="schet"><?php echo $_smarty_tpl->tpl_vars['schet_3']->value;?>
+                        <div id="schet_3" class="schets"><?php echo $_smarty_tpl->tpl_vars['schet_3']->value;?>
 </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</footer>
 </div>
 <!--end contayner-->
+<!--scrips after load-->
+<script src="/js/bootstrap/bootstrap.js" ></script>
+<script src="/js/t.scripts.js" ></script>
+<script src="/js/a.scripts.js" ></script>
+<script src="/js/send_message.js" ></script>
 </body>
 </html><?php }} ?>

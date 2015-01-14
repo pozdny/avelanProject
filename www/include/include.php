@@ -18,10 +18,3 @@ require_once 'functions_admin.php';
 require_once 'library.php';
 require_once 'string.php';
 require_once 'functions_catalog.php';
-
-header("Content-type: text/html; Charset=utf8");
-//header("Cache-Control: no-store, no-cache, must-revalidate");
-//header("Expires: " . date("r"));
-//cache
-header("Cache-Control: public");
-header("Expires: " . date("r", time() + 3600));

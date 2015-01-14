@@ -160,26 +160,23 @@ $(document).ready(function() {
             iconStatusErrTitle: "Поле не может быть пустым!"
         }
     });
-    //BUTTONS CALCULATOR
+    //BUTTONS CALCULATOR AND RESPONSE
     var calc = $('#calc-power');
     var response = $('#responseI');
     calc.hover(
-        function()
-        {
+        function(){
             $(this).css('margin-right', '0px');
         },
-        function()
-        {
+        function(){
             $(this).css('margin-right', '-2px');
         });
+
     response.hover(
-        function()
-        {
-            $(this).css('margin-left', '-3px');
+        function(){
+            $(this).css('margin-left', '0px');
         },
-        function()
-        {
-            $(this).css('margin-left', '-7px');
+        function(){
+            $(this).css('margin-left', '-2px');
         });
 
     //LOGO LINK
@@ -244,32 +241,27 @@ $(document).ready(function() {
                             )
                         )
                         .append($("<div>").attr({id:"resultOrderBack"}))
-                        .append($('<div>').attr({class:"row"})
-                            .append($('<div>').attr({class:"col-xs-12"})
-                                .append($("<button>").attr({id:"blankButtonBack",disabled:"disabled", class:"btn btn-primary", type:"submit", "data-loading-text":"Подождите..."})
-                                    .append("Отправить"))
-                                .append($('<button data-dismiss="modal">').attr({class:"btn btn-default"})
-                                    .append("Закрыть"))
-                            )
-                        )
-
                     )
-
+                )
+                .append($('<div>').attr({class:"modal-footer"})
+                    .append($('<div>').attr({class:"row"})
+                        .append($('<div>').attr({class:"col-xs-12"})
+                            .append($("<button>").attr({id:"blankButtonBack",disabled:"disabled", class:"btn btn-primary", type:"submit", "data-loading-text":"Подождите...", form:"blankFormBack"})
+                                .append("Отправить"))
+                            .append($('<button data-dismiss="modal">').attr({class:"btn btn-default"})
+                                .append("Закрыть"))
+                        )
+                    )
                 )
             )
         )
         .appendTo(wrap);
     var form = $('#blankFormBack'),
-        H = $("html"),
         button = $('#blankButtonBack'),
         result = $('#resultOrderBack'),
         order_backcall = $('#order_backcall'),
-        calcImg = $('#calcImg'),
-        topIndent = calcImg.offset().top + calcImg.height() + 30;
-    if(H.height() < 600){
-        order_backcall.offset({top:topIndent, left:order_backcall.offset().left});
-    };
-    //order_backcall.offset({top:topIndent});
+        calcImg = $('#calcImg');
+
     order_backcall.click(function(){
         if(form.hasClass('send')){
             var resultOrderInner = $('#resultOrderInner');
@@ -331,7 +323,7 @@ $(document).ready(function() {
             var arr = form.serializeArray();
             btn.button('loading');
             $.ajaxSetup({
-                url: loc + "/admin_panel/ajaxFunc.php",
+                url:"/check_view",
                 type: "POST",
                 dataType:"json",
                 cache:false,
@@ -355,7 +347,245 @@ $(document).ready(function() {
             });
         }
     });
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //RESPONSE ..............................................
+    title = "Отзывы и предложения";
+    //var text  = '<br>Мы всегда рады предоставить развернутую консультацию. Если Вас интересует что-либо из нашей сферы деятельности – стоимость наших услуг, ассортимент и т.д. – заполните форму, расположенную ниже. Менеджеры свяжутся с Вами вскоре после получения запроса.';
+    $('<div class="modal fade" id="myModalResp" tabindex="-1" role="dialog" aria-labelledby="myModalResp" aria-hidden="true" >')
+        .append($('<div>').attr("class", "modal-dialog")
+            .append($('<div>').attr("class", "modal-content")
+                .append($('<div>').attr("class", "modal-header")
+                    .append($('<button data-dismiss="modal" aria-hidden="true">').attr({type:"button", class:"close"})
+                        .append('&times;'))
+                    .append($('<h3 class="modal-title" id="myModalResp">')
+                        .append(title)
+                    )
+                )
+                .append($('<div>').attr("class", "modal-body")
+                    .append($("<form>").attr({id:'blankFormResp', class:'notsend form-horizontal', role:'form'})
+                        .append($("<div>").attr("class", "form-group")
+                            .append($("<div>").attr("class", "col-xs-6" )
+                                .append($("<select>").attr({name:"respSelect", id:"respSelect"})
+                                    .append($("<option selected='selected' disabled='disabled'>").attr({value:""})
+                                        .append("Выберите категорию")
+                                    )
+                                    .append($("<option>").attr({value:1})
+                                        .append("Отзыв")
+                                    )
+                                    .append($("<option>").attr({value:2})
+                                        .append("Ошибка на сайте")
+                                    )
+                                    .append($("<option>").attr({value:3})
+                                        .append("Предложения по ассортименту")
+                                    )
+                                )
+                            )
+                        )
+                        .append($("<div>").attr("class", "form-group")
+                            .append($("<div>").attr("class", "col-xs-12" )
+                                .append($("<textarea rows='4' name='respTxt' rel='tooltip' data-container='#myModalResp' data-toggle='tooltip' data-placement='bottom' title='Кол-во символов: 300'>").attr({id: "respTxt", placeholder:"Текст сообщения", class:"form-control", maxlength:"300"}).css("width", "100%"))
+                            )
+                        )
+                        .append($("<div>").attr({id:"resultOrderResp"}))
+                    )
+                )
+                .append($('<div>').attr({class:"modal-footer"})
+                    .append($('<div>').attr({class:"row"})
+                        .append($('<div>').attr({class:"col-xs-12"})
+                            .append($("<button>").attr({id:"blankButtonResp", class:"btn btn-primary", type:"submit", "data-loading-text":"Подождите...", form:"blankFormResp"})
+                                .append("Отправить"))
+                            .append($('<button data-dismiss="modal">').attr({class:"btn btn-default"})
+                                .append("Закрыть"))
+                        )
+                    )
+                )
+            )
+        )
+        .appendTo(wrap);
+    //FORMSTYLER.............................................
+    $('select').styler();
+    //TOOLTIP.........................................
+   $("body").tooltip({
+        selector: '[rel=tooltip]',
+        trigger:"focus"
 
+    });
+
+    var respForm   = $('#blankFormResp'),
+        buttonResp = $('#blankButtonResp'),
+        respResult = $('#resultOrderResp'),
+        respSelect = $('#respSelect'),
+        respTxt    = $('#respTxt'),
+        respInputs = respForm.find('select,textarea'),
+        respSelectLi = $('.jq-selectbox__dropdown').find('ul li');
+
+
+    //............VALIDATOR RESP............................................
+    respSelect.on('change', function(){
+        if($(this).val()){
+            $(this).siblings('span').remove();
+            $('<span class="error valid" for="respSelect">')
+                .append($("<i>").attr({class:"fa fa-check"}))
+                .insertAfter($(this));
+            if(respForm.hasClass('send')){
+                var resultOrderInner = $('#resultOrderInner');
+                respForm.removeClass('send').addClass('notsend').find(resultOrderInner).remove();
+                buttonResp.text('Отправить').removeClass('disabled').attr({disabled:false});
+            };
+        }
+    });
+    response.on('click', function(){
+        if(respForm.hasClass('send')){
+            var resultOrderInner = $('#resultOrderInner');
+            respForm.removeClass('send').addClass('notsend').find(resultOrderInner).remove();
+            buttonResp.text('Отправить').removeClass('disabled').attr({disabled:false});
+        };
+    })
+    respTxt.on('keyup input focus', function(){
+        if(respForm.hasClass('send')){
+            var resultOrderInner = $('#resultOrderInner');
+            respForm.removeClass('send').addClass('notsend').find(resultOrderInner).remove();
+            buttonResp.text('Отправить').removeClass('disabled').attr({disabled:false});
+        };
+        var tooltipInner = $('#myModalResp .tooltip .tooltip-inner');
+        check_quantity($(this), tooltipInner);
+    });
+    respSelectLi.each(function(i){
+        var $this = $(this);
+        $this.on('click',function(){
+            if(i != 0){
+                respSelect.siblings('span').remove();
+                $('<span class="error valid" for="respSelect">')
+                    .append($("<i>").attr({class:"fa fa-check"}))
+                    .insertAfter(respSelect);
+                if(respForm.hasClass('send')){
+                    respSelect.prop('selectedIndex', i);
+                    var resultOrderInner = $('#resultOrderInner');
+                    respForm.removeClass('send').addClass('notsend').find(resultOrderInner).remove();
+                    buttonResp.text('Отправить').removeClass('disabled').attr({disabled:false});
+                };
+            }
+        })
+
+    })
+    function check_quantity(obj, obj2){
+        var textValue  = obj.val();
+        var textLength = textValue.length;
+        var num        = 300;
+        num = num - textLength;
+        if(num == 0)
+        {
+            num = '0';
+        }
+
+        obj2.html('Осталось символов: ' + num );
+    }
+    function respBackFunc(data, thisForm, result){
+        if(data != ''){
+            $('.jq-selectbox__select-text').text('Выберите категорию');
+            respSelectLi.each(function(i){
+                if(i == 0){
+                    $(this).addClass('sel selected');
+                }
+                else{
+                    $(this).removeClass('sel').removeClass('selected');
+                }
+            })
+            respSelect.prop('selectedIndex',0);
+            thisForm.removeClass('notsend').addClass('send');
+            thisForm.get(0).reset();
+            var mess = '';
+            if(data.rez == '1'){
+                mess = 'Спасибо, Ваше сообщение отправлено!';
+            }
+            else{
+                mess = 'При отправке сообщения возникли ошибки, поробуйте еще раз!';
+            }
+            respInputs.each(function(){
+                $(this).val('').removeClass('valid').siblings('span').remove();
+            });
+            result.append($("<div>").attr({id:"resultOrderInner"}).text(mess).slideDown(200));
+        }
+    }
+    respForm.validate({
+        debug:true,
+        rules: {
+            "respSelect": {
+                required:true,
+                min : 1
+            },
+            respTxt:{
+                required:true,
+                minlength: 1,
+                maxlength: 300
+            }
+        },
+        messages: {
+            respSelect: {
+                required: "Выберите категорию"
+            },
+            respTxt:{
+                required: "Добавьте сообщение",
+                maxlength: "Максимум 300 символов"
+}
+        },
+        errorElement: "span",
+        errorPlacement: function(error, element) {
+            if (element.attr("name") == "respTxt") {
+                element.siblings('label').remove();
+                if(element.hasClass('valid')){
+
+                }
+                else{
+                    $('<label class="error" for="respTxt">')
+                        .append(error.text())
+                        .insertAfter(element);
+                }
+
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        success: function(label) {
+            label.addClass('valid').append($("<i>").attr({class:"fa fa-check"}));
+            if(respForm.hasClass('send')){
+                var resultRespInner = $('#resultRespInner');
+                respForm.removeClass('send').addClass('notsend').find(resultRespInner).remove();
+            };
+
+        },
+        submitHandler: function() {
+            var btn = $('#blankButtonResp');
+            var arr = respForm.serializeArray();
+            btn.button('loading');
+            $.ajaxSetup({
+                url:"/check_view",
+                type: "POST",
+                dataType:"json",
+                cache:false,
+                success: function(data)
+                {
+                    respBackFunc(data,respForm,respResult);
+                },
+                error: function(obj, err)
+                {
+
+                }
+            });
+            $.ajax({
+                data:{
+                    num:7,
+                    value:arr
+                }
+            }).always(function () {
+                buttonResp.text('Отправить').addClass('disabled').attr({disabled:true});
+
+            });
+        }
+    });
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //MODAL LOGIN
     //........................................................
     $('#loginModal').modal({
@@ -363,19 +593,22 @@ $(document).ready(function() {
         backdrop: true,
         show: true
     });
-    var close = $(".close, .close-foot, #loginModal");
+    var close = $("#loginModal .close, #loginModal .close-foot, #loginModal");
     close.on('click', function(){
+
         location.href = loc;
+    })
+    $("#loginForm").on("click",function(e){
+        e.stopPropagation();
     })
     var login = $("#login-form");
     login.on('click', function(e){
-        e.stopPropagation();
         loginForm();
     })
     function loginForm(){
         var arr = $("#loginForm").serializeArray();
         $.ajaxSetup({
-            url:"/admin_panel/ajaxFunc.php",
+            url:"/check_view",
             type: "POST",
             dataType:"json",
             cache:false,
@@ -392,11 +625,11 @@ $(document).ready(function() {
                     if(rez == 'ok'){
                         location.href = 'admin';
                     }
-                    else{console.log(data.rez);
+                    else{
                         password.after('<div class="col-lg-6 col-lg-offset-3" id="error_row"><div class=" style3" id="error_mess"></div></div>');
                         var error_mess = $("#error_mess");
                         error_mess.empty();
-                        if(rez == 'no'){ console.log('no');
+                        if(rez == 'no'){
                             text = "неправильный логин или пароль";
                             error_mess.append(text);
                         }
@@ -430,7 +663,9 @@ $(document).ready(function() {
             }
         });
     }
-    //.....................................................................................
+
+
+
 });
 $(document).on('click.bs.tab.data-api', '[data-toggle="tab"]', function (e) {
     e.preventDefault();

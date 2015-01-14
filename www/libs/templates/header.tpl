@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang=ru>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <meta charset=utf-8 >
     <meta name="viewport" content="width=1024">
-    <meta name="robots" content="index, follow" />
-    <meta name='description' content='{$description}' />
-    <meta name='keywords' content='{$keywords}' />
+    <meta name="robots" content="index, follow">
+    <meta name='description' content='{$description}'>
+    <meta name='keywords' content='{$keywords}'>
     <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
-    <script src="/js/jquery/jquery-2.0.3.js" type="text/javascript"></script>
+    <link href="/css/jquery/formstyler.css" rel="stylesheet">
+    <script src="/js/jquery/jquery-2.0.3.js"></script>
     <!--[if lt IE 9]>
-    <script src="/js/html5shiv.js" type="text/javascript"></script>
-    <script src="/js/respond.min.js" type="text/javascript"></script>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
     <![endif]-->
     <link type="image/x-icon" href="/favicon.ico" rel="icon">
     <link type="image/x-icon" href="/favicon.ico" rel="shortcut icon">
@@ -20,6 +21,7 @@
 <body>
 <div class="bg"></div>
 <header>
+    {$gerld}
     <div class="header-inner">
         {*подключаем навигатор*}
         {$navbar}
@@ -45,19 +47,26 @@
                 <div class="col-xs-8 ">
                     <div class="row">
                         <div class="col-xs-8 servise-info">
-                            <span class="text">Отдел сервисного обслуживания: </span><span class="phone"> +7(913) 016-75-15</span>
+                            <span class="text">Отдел сервисного обслуживания: </span><span class="phone">{$phone_service}</span>
                         </div>
                         <div class="col-xs-4 company-phone">
-                            <i class="fa round-icons-phone"></i><span class="phone"> 8 (383) 201 83 39</span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="company-email pull-right">
-                                <a href="mailto:avelan.info@gmail.com">avelan.info@gmail.com</a>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                   <i class="fa round-icons-phone"></i>
+                                   <span class="phone"> {$phone}</span>  
+                                </div>
+                            </div>     
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="company-email pull-right">
+                                        <a href="mailto:avelan.info@gmail.com">{$email}</a>
+                                    </div>
+                                </div>
                             </div>
+                                                                                  
                         </div>
                     </div>
+                    
                 </div>
             </div>
             <div class="row block-2">
@@ -67,7 +76,7 @@
                             <i class="fa round-icons-big-clock"></i><span class="text sansbold">График работы:</span>
                         </div>
                         <div class="col-xs-6">
-                            <span class="time sansbold">Пн-Пт: 09:00 - 17:30 <br>Выходные: Сб - Вск </span>
+                            <span class="time sansbold">{$work}<br>{$weekend}</span>
                         </div>
                     </div>
 

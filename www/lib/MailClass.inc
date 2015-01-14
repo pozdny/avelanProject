@@ -15,9 +15,8 @@ class FreakMailer extends PHPMailer
     	function FreakMailer()
     	{
             global $site;
-			// Áåğåì èç ôàéëà config.php ìàññèâ $site
             $this->Mailer = "mail";
-            $this->CharSet = "windows-1251";
+            $this->CharSet = "utf-8";
       		if($site['smtp_mode'] == 'enabled')
      		{
         		$this->Host = $site['smtp_host'];
@@ -41,7 +40,7 @@ class FreakMailer extends PHPMailer
         		$this->FromName = $site['from_name'];
       		}
             else{
-                $this->FromName = $this->FromName.' [Ñàéò] ';
+                $this->FromName = $this->FromName.' [Ğ¡Ğ°Ğ¹Ñ‚] ';
             }
       		if(!$this->Sender)
       		{

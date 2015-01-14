@@ -5,6 +5,9 @@
  * Date: 22.09.14
  * Time: 16:46
  */
+//cache
+header("Cache-Control: public");
+header("Expires: " . date("r", time() + 3600));
 $actions = array(
     'MainPage',
     'about',
@@ -18,6 +21,36 @@ $actions = array(
     'raschet-moshchnosti-oborudovaniya',
     'admin-panel'
 );
+$admin_actions = array(
+    'MainPage',
+    'pages',
+    'products',
+    'services',
+    'nashi_raboty',
+    'prices',
+    'manufacturer',
+    'info_site',
+    'admin_users',
+    'schet',
+    'online',
+    'response',
+    'logout',
+    'get_edit_submenu',
+    'get_edit_all',
+    'get_edit_prices',
+    'edit_catalog',
+    'get_edit_images',
+    'get_edit_prices',
+    'edit_content',
+    'edit_services',
+    'edit_nashi_raboty',
+    'edit_metatags',
+    'edit_metatags_other',
+    'get_edit_nashi_raboty',
+    'edit_table',
+
+);
+
 $arrayBreadCrumbs = array(
     'catalog',
     'services',
@@ -43,6 +76,8 @@ define ( 'IMAGES_SERV',       'images_services' );
 define ( 'SERVICES',          'services' );
 define ( 'ADMIN_CAT_M',       'admin_catalog_menu' );
 define ( 'ADMIN_ACTIONS',     'admin_actions' );
+define ( 'ADMIN_PROC',        'admin_proc' );
+define ( 'ADMIN_PROC_M',      'proc' );
 define ( 'TABLE_INFO',        'info_site' );
 define ( 'SHADULE',           'shadule' );
 define ( 'SCHET',             'schet' );
@@ -77,7 +112,7 @@ define ( 'DOTTED', 'class="dotted"' );
 define ( 'PATH_IMG', '/img/' );
 define ( 'PATH_IMG_GLOB', 'img/catalog/' );
 define ( 'PATH_IMG_SMALL', 'img/catalog/small/' );
-define ( 'PATH_IMG_R', '/img/'.RABOTY.'/' );
+define ( 'PATH_IMG_R', 'img/'.RABOTY.'/' );
 define ( 'PATH_IMG_SMALLR', 'img/nashi_raboty/small/' );
 define ( 'PATH_IMG_BIGR', 'img/nashi_raboty/big/' );
 define ( 'PATH_IMG_SERVICES', 'img/services/' );
@@ -98,6 +133,13 @@ define ( 'EDIT_IMG', '<img src="/img/icons/edit_full.png" title="полное р
 define ( 'EDIT_IMG_K', '<img src="/img/icons/edit_key.png" title="изменить метатеги" />');
 define ( 'EDIT_IMG_Q', '<img src="/img/icons/edit_title.png" title="быстро изменить название позиции по-русски" />');
 define ( 'DEL_IMG', '<img src="/img/icons/delete.png" title="удалить" />');
+define ( 'EDIT_IMG_SITE', '<i class="fa fa-edit fa-2x" title="редактирование" ></i>');
+define ( 'NODATA', 'Нет данных');
+// Максимальный размер файла вложения в мегабайтах (2мб)
+define ( 'MAX_FILE_SIZE', 2048000 );
+//путь для загрузки файлов
+define ( 'PATH_EXCEL', $_SERVER["DOCUMENT_ROOT"].'/files/prices/' );
+define ( 'PATH_EXCEL_LOC', $_SERVER["DOCUMENT_ROOT"].'/' );
 // solt login, password
 define ( 'SALT_LOG', 'gu&@' );
 define ( 'SALT_PAS', '7J9$' );

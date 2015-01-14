@@ -25,6 +25,7 @@ body{
     margin:0 auto;
     padding: 0;
     position: relative; /* Opera 9.5 */
+
 }
 .main{
     width:100%;
@@ -33,17 +34,19 @@ body{
     position:relative;
     overflow:hidden;
     margin:0 auto -53px auto;
+    background: none repeat scroll 0 0 #f0f0f0;
 }
 #content_border{
     height:auto;
     margin:0;
     position:static;
-    background: none repeat scroll 0 0 #f0f0f0;
+
 }
 
 #undermain{
     position:relative;
     width:100%;
+    min-height: 400px;
 }
 .head
 {
@@ -110,292 +113,106 @@ body{
 	float:right
 }
 /*............table...............................*/
-.a_kat_title a
-{
-	cursor:pointer;
-	text-decoration:none;
-	line-height:1.9;
-	width:100%;
+.table{
+    margin-bottom:10px;
+}
+.table > tbody > tr > td.td_nopad{
+    padding:0;
+}
+.table .submenu_prod td:nth-child(-n+1) a{
+    color:#fff
 }
 
-.a_kat_subtitle ul
-{
-	margin:0;
-	padding:0;
-	list-style-type:none
-}
-.a_kat_subtitle ul li
-{
-	text-align:left
-}
-.a_kat_subtitle ul li a
-{
-	cursor:pointer;
-	line-height:1.9;
-}
-.a_kat_subtitle ul li a:hover
-{
-	color:#000;
-	text-decoration:underline;
-}
-
-/*.......collapse.......*/
-.a_color_line
-{
-	overflow:hidden;
-	background:#797979;
-	height:26px;
-	width:100%;
-	padding:8px 0 0 0;
-	font:bold 14px Tahoma, Geneva, sans-serif;
-	color:#fff;
-	text-align:center;
-
-}
-.a_dop
-{
-	display: block;
-}
 /*...........product..........*/
 .submenu_prod td
 {
-	background: url(../img/admin/blue_grad.jpg) repeat-x;
-	height:30px
+    background: url(../img/admin/blue_grad.jpg) repeat-x;
+    height:30px
 }
 .submenu_td2 td
 {
-	background: url(../img/admin/grey_grad_tab.jpg) repeat-x;
-	height:30px;
+    background: url(../img/admin/grey_grad_tab.jpg) repeat-x;
+    height:30px;
 }
-.submenu_td3 td
-{
-	background:#e7e7e7;
+/* diff */
+fieldset {
+    background: none repeat scroll 0 0 #dedddd;
+    margin-bottom: 15px;
+    padding: 10px;
 }
-.submenu_td4 td
-{
-	background:#FFC59F;
+legend a{
+    color:#ed2525;
+    font-size:0.9em
 }
-.submenu_td td
-{
-	background: url(../images/main/orange_grad_tab.jpg) repeat-x;
-	height:30px;
+legend{
+    margin-bottom: 5px;
 }
-.submenu_prod td .style1
-{
-	color:#fff;
-	font:normal bold  13px Tahoma;
+.page-header {
+    border: medium none;
+    display: block;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-bottom: 0;
 }
-.a_dop_product
-{
-	display: block;
+.page-header h1 {
+    color: #1f6db2;
+    display: inline-block;
+    line-height: 24px;
+    margin: 0 0 20px;
+    font-size:1.6em
 }
-.admin_table
-{
-	border:solid 1px #999;
-	width:100%;	
-	border-collapse:collapse;
-	margin-bottom:10px;
-	background:#fff;
+.big_block_img {
+    padding: 5px;
+    position: relative;
 }
-.submenu_prod td .style1, .admin_table .submenu_td2 td .style1, .submenu_prod td .style3,  .submenu_td2 td .style9, .admin_table .submenu_td2 td .style10, .submenu_td2 td .style3, .submenu_td3 td div, .submenu_td4 td div, .admin_table .submenu_td3, .admin_table .submenu_td td 
-{
-	padding:0 5px;
+.del_div_big {
+    height: 16px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 16px;
 }
-.admin_table td
-{
-	border:solid 1px #999;
-	height:30px;
+.del_div {
+    height: 16px;
+    width: 16px;
 }
-
-.admin_table th
-{
-	border:solid 1px #999;
-	text-align:center;
+.classHidden a{
+    color:#D83A61;
 }
-
-.table_all
-{
-	
-	width:100%;
-	border-collapse:collapse;
-	background:#fff
+.del_button:hover{
+    cursor: pointer;
 }
-.table_all td
-{
-	padding-left:1px;
-	border:solid 1px #dcdedb;
-	
+/*
+	==================
+	[ NAVPAGE]
+	==================
+*/
+.navpage {
+    color: #727272;
+    margin: 30px 0 0;
 }
-.img_edit
-{
-	cursor:pointer
+.navpage .titleList {
+    margin-left: -16px;
 }
-.form_add_menu
-{
-	margin:10px 0;
+.navpage li {
+    display: inline;
+    margin-right: 6px;
+    vertical-align: middle;
 }
-fieldset
-{
-	background:#d3d1d1;
-	margin:0;
-	
+.navpage a:link, .navpage a:visited {
+    color: #727272;
+    text-decoration: none;
 }
-
-legend, legend a
-{
-	font:bold 14px Tahoma, Geneva, sans-serif;
-	border-bottom:1px dotted #000;
-	color:#ed2525;
-	
+.navpage a:hover, .navpage a:focus {
+    text-decoration: underline;
 }
-.edit_block_img
-{
-	float:left;
-	margin-right:5px;
+.navpage .current {
+    background: none repeat scroll 0 0 #1E71BA;
+    display: inline-block;
+    padding: 3px 7px;
 }
-
-.showTable  
-{
-  border-collapse: separate;
-  background-color: #FFF;
-  empty-cells: show;  
-  border: 1px #a2a0a0 solid;
-  width: 83%;
-  border-spacing: 1px;
-  margin:5px 0; 
-  
-  
-}
-.showTable th 
-{
-	font-size: 14px; 
-	font-weight : bold;
-	background-color: #AFAFAF; 
-	height: 25px;
-	text-align:center;
-	
-}
-.showTable td
-{ 
-  background-color: #2D87C0;
-  padding: 4px;
-  
-}
-.showAT td
-{
-	background-color: #E9E9E9;
-    padding: 4px;
-}
-select option
-{
-	width:300px;
-}
-.rright_admin
-{
-	text-align:right;
-}
-.lleft_admin
-{
-	text-align:left;
-}
-.ccenter_admin
-{
-	text-align:center;
-}
-.admin_tr td
-{
-	border-bottom:solid 1px #CCC
-}
-.zebra_order 
-{
-	margin-top:5px;
-    width: 100%; /* ������ ������� */
-    border-collapse: collapse; /* ������� ������� ����� ����� ����� */
-}
-
-.zebra_order td, .zebra_order th
-{
- 	 padding:4px;
-}
-.zebra_order td 
-{
-	background-color: #FCFCFC;
-}
-.th_class th
-{
-
-	border-bottom:solid 1px #000
-}
-.ordinary_table
-{
-	border-collapse: collapse;
-}
-.tr_class
-{
-	text-align:right
-}
-/*.... edit_menu.....*/
-.length_edit
-{
-	width:9%;
-	height:20px;
-	float:left;
-	text-align:right;
-}
-.length_edit_2
-{
-	width:88%;
-	height:20px;
-	float:left;
-}
-.table_edit_menu
-{
-	background:#e9e9e9;
-	border:1px dotted #333;
-	width:100%;
-}
-.input_div
-{
-	width:3%;
-	height:20px;
-	float:left
-}
-#table_add_img .big_block_img, #table_add_imgIcon .big_block_img
-{
-	border:1px dotted #ed2525;
-	margin-bottom:5px
-}
-.notice_block
-{
-	border:1px solid #ed2525;
-	margin:5px 0;
-	padding:4px;
-}
-.div_name_img
-{
-	float:left
-}
-.new_mess:hover
-{
-	cursor:pointer
-}
-.messageNew
-{
-	float:left
-}
-.classHidden a
-{
-	color:#D83A61;
-}
-.classHidden a.style1
-{
-	color:#D83A61;
-}
-/* editor */
-#bx_btn_InsertOrderedList
-{
-	width:20px;
-	height:20px;
-	background-image:url(../img/icon/_global_iconkit.gif);
-	background-position: -200px -20px!important;
+.navpage .current {
+    color: #FFFFFF;
+    cursor: default;
+    text-decoration: none;
 }

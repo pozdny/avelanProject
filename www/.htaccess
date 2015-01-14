@@ -1,3 +1,23 @@
+<ifmodule mod_expires.c>
+ExpiresActive On
+# 1 ГОД
+<FilesMatch "\.(ico|pdf|flv)$">
+Header set Cache-Control "max-age=29030400, public"
+</FilesMatch>
+# 1 НЕДЕЛЯ
+<FilesMatch "\.(jpg|jpeg|png|gif|swf)$">
+Header set Cache-Control "max-age=604800, public"
+</FilesMatch>
+# 2 ДНЯ
+<FilesMatch "\.(xml|txt|css|js)$">
+Header set Cache-Control "max-age=172800, proxy-revalidate"
+</FilesMatch>
+# 1 ЧАС
+<FilesMatch "\.(html|htm|php)$">
+Header set Cache-Control "max-age=3600, private, proxy-revalidate"
+</FilesMatch>
+</ifmodule>
+
 DirectoryIndex index.php?action=MainPage
 Options +FollowSymLinks
 RewriteEngine On
@@ -12,6 +32,10 @@ RewriteRule ^catalog/rashodnyye-materialy$  /catalog/rashodnyye-materialy/sistem
 RewriteCond %{HTTP_HOST} (.*)
 RewriteCond %{REQUEST_URI} /$ [NC]
 RewriteRule ^(.*)(/)$ $1 [L,R=301]
+
+RewriteRule ^check_view/?$   /admin_panel/ajaxFunc.php [L]
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /admin_panel/ajaxFunc\.php\ HTTP/
+RewriteRule ^ajaxFunc\.php$ /check_view? [R=301,L]
 
 RewriteCond %{HTTP_HOST} ^www.авелан.рф
 RewriteRule (.*) http://авелан.рф/$1 [R=301,L]
@@ -30,6 +54,8 @@ RewriteRule ^index\.php$ / [R=301,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?action=$1 [L,QSA]
+
+
 
 AddDefaultCharset utf-8
 
